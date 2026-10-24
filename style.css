@@ -1,6 +1,9 @@
 body{
     background-color: rgb(48, 48, 48);
     margin: 0px;
+    background-image: url('Imagens/menuprincipalteste2.webp');
+    background-size: cover;
+    background-position: center;
 }
 
 .MenuPrincipal{
@@ -14,9 +17,26 @@ body{
 .MenuPrincipal h1{
     color: gold;
     font-size: 40px;
+    text-shadow: 3px 3px 0px black;
 }
 
 .MenuPrincipal button{
     color: White;
+    padding: 12px 30px;
+    background-color: black;
+    cursor: pointer;
 }
 
+.MenuPrincipal button:hover{
+    background-color: rgb(55, 55, 55);
+    color: rgb(207, 176, 0);
+}
+
+#tela-jogo {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+}
