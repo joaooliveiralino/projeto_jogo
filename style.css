@@ -1,0 +1,22 @@
+body{
+    background-color: rgb(48, 48, 48);
+    margin: 0px;
+}
+
+.MenuPrincipal{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.MenuPrincipal h1{
+    color: gold;
+    font-size: 40px;
+}
+
+.MenuPrincipal button{
+    color: White;
+}
+
