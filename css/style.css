@@ -39,4 +39,273 @@ body{
     align-items: center;
     min-height: 100vh;
     color: white;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+
+    background-image: url('../Imagens/acampamentoteste.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#opcoes-acampamento{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#opcoes-acampamento button{
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#opcoes-acampamento button:hover{
+    background-color: #51432b;
+    color: #f0d58a;
+}
+
+#tela-bifurcacao {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+
+    background-image: url("../Imagens/bifurcacaoteste.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#tela-bifurcacao h1 {
+    color: #f0d58a;
+    font-size: 36px;
+    text-shadow: 3px 3px 0 black;
+}
+
+#tela-bifurcacao p {
+    max-width: 500px;
+    font-size: 18px;
+    line-height: 1.5;
+    text-shadow: 2px 2px 3px black;
+}
+
+#opcoes-bifurcacao {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#opcoes-bifurcacao button {
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#opcoes-bifurcacao button:hover {
+    background-color: #51432b;
+    color: #f0d58a;
+}
+
+#tela-cidade {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+
+    background-image: url("../Imagens/cidadeteste.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#tela-cidade h1 {
+    color: #f0d58a;
+    font-size: 36px;
+    text-shadow: 3px 3px 0 black;
+}
+
+#tela-cidade p {
+    max-width: 500px;
+    font-size: 18px;
+    line-height: 1.5;
+    text-shadow: 2px 2px 3px black;
+}
+
+#opcoes-cidade {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#opcoes-cidade button {
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#opcoes-cidade button:hover {
+    background-color: #51432b;
+    color: #f0d58a;
+}
+
+#tela-mercador,
+#tela-cacador {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#tela-mercador {
+    background-image: url("../Imagens/lojamercadorteste.webp");
+}
+
+#tela-cacador {
+    background-image: url("../Imagens/lojacacadorteste.webp");
+}
+
+#tela-mercador h1, #tela-cacador h1 {
+    color: #f0d58a;
+    font-size: 36px;
+    text-shadow: 3px 3px 0 black;
+}
+
+#tela-mercador p, #tela-cacador p {
+    max-width: 500px;
+    font-size: 18px;
+    line-height: 1.5;
+    text-shadow: 2px 2px 3px black;
+}
+
+#itens-mercador, #itens-cacador {
+    margin: 20px 0;
+}
+
+#tela-mercador button, #tela-cacador button {
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#tela-mercador button:hover, #tela-cacador button:hover {
+    background-color: #51432b;
+    color: #f0d58a;
+}
+
+#categorias-mercador {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#categorias-mercador button, #botao-voltar-mercador {
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#categorias-mercador button:hover, #botao-voltar-mercador:hover {
+    background-color: #51432b;
+    color: #f0d58a;
+}
+
+#itens-mercador {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.item-mercador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: rgba(20, 17, 13, 0.85);
+    border: 1px solid #c5a45b;
+    color: white;
+}
+
+#categorias-cacador {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#categorias-cacador button {
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#categorias-cacador button:hover {
+    background-color: #51432b;
+    color: #f0d58a;
+}
+
+#itens-cacador {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 20px;
+}
+
+.item-cacador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 12px;
+    margin-bottom: 8px;
+    background-color: rgba(20, 17, 13, 0.85);
+    border: 1px solid #c5a45b;
+    color: white;
 }
