@@ -14,8 +14,67 @@
         </section>
         
         <section id="tela-jogo">
-            <h1>Começo da aventura</h1>
-            <p>Sua jornada está começando</p>
+            <h1>Acampamento</h1>
+
+            <p>Este é seu acampamento. Se prepare para o que vem a seguir.</p>
+
+            <nav id="opcoes-acampamento">
+                <button>Descançar</button>
+                <button>Inventario</button>
+                <button>Criar/Construir</button>
+                <button id="botao-explorar">Explorar/Viajar</button>
+            </nav>
+        </section>
+
+        <section id="tela-bifurcacao">
+            <h1>Bifurcação</h1>
+            <p>O caminho se divide em duas direções. Para onde você deseja ir?</p>
+
+            <nav id="opcoes-bifurcacao">
+                <button id="botao-cidade">Ir à cidade</button>
+                <button id="botao-florestal">Ir para a área florestal</button>
+                <button id="botao-voltar-acampamento">Voltar para o acampamento</button>
+            </nav>
+        </section>
+
+        <section id="tela-cidade">
+            <h1>Cidade</h1>
+            <p>Você chegou na cidade. Entre as ruas movimentadas, talvez você encontre algo útil para sua jornada</p>
+
+            <nav id="opcoes-cidade">
+                <button id="botao-mercador">Loja do Mercador</button>
+                <button id="botao-cacador">Loja do Caçador</button>
+                <button id="botao-voltar-bifurcacao">Voltar à bifurcação</button>
+            </nav>
+        </section>
+
+        <section id="tela-mercador">
+            <h1>Loja do Mercador</h1>
+            <p>Poções, alimentos e materiais de criação. Prepare-se bem antes de partir em uma aventura.</p>
+
+            <nav id="categorias-mercador">
+                <button class="categoria-mercador" data-categoria="pocoes">Poções</button>
+                <button class="categoria-mercador" data-categoria="alimentos">Alimentos</button>
+                <button class="categoria-mercador" data-categoria="materiais">Materiais</button>
+            </nav>
+
+            <div id="itens-mercador"></div>
+
+            <button id="botao-voltar-mercador">Voltar à cidade</button>
+        </section>
+
+        <section id="tela-cacador">
+            <h1>Loja do Caçador</h1>
+            <p>Armas para enfrentar os perigos do mundo. Traga também os materiais e troféus que encontrar em suas caçadas.</p>
+
+            <nav id="categorias-cacador">
+                <button class="categoria-cacador" data-categoria="armas">Comprar armas</button>
+                <button class="categoria-cacador" data-categoria="drops">Vender drops</button>
+            </nav>
+
+            <div id="itens-cacador"></div>
+
+            <button id="botao-voltar-cacador">Voltar à cidade</button>
         </section>
     </main>
 
