@@ -63,7 +63,7 @@
 #inv-overlay .eq .slot.empty .ph{width:60%;height:60%;opacity:.28}
 #inv-overlay .eq .slot.equipped{background:#4a3018;box-shadow:inset 0 0 0 3px #F2C14E}
 
-#inv-overlay .item{width:78%;height:78%;cursor:grab;position:relative}
+#inv-overlay .item{width:78%;height:78%;cursor:grab;position:relative;}
 #inv-overlay .item svg,#inv-overlay .ph svg{width:100%;height:100%;display:block;shape-rendering:crispEdges;pointer-events:none}
 #inv-overlay .item:active{cursor:grabbing}
 #inv-overlay .item::after{content:attr(data-name);position:absolute;bottom:108%;left:50%;transform:translateX(-50%);

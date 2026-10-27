@@ -75,7 +75,7 @@ document.querySelector("#botao-voltar-mercador")
 document.querySelector("#botao-voltar-cacador")
     .addEventListener("click", voltarDoCacador);
 
-
+    
 //Sistema loja do mercador
 
 const produtosMercador = {
