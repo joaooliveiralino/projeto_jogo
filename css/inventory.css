@@ -1,0 +1,101 @@
+/* ============================================================
+   INVENTÁRIO — css/inventory.css
+   Tudo começa com #inv-overlay para não afetar o resto do jogo.
+   ============================================================ */
+#inv-overlay{
+  --b0:#1A100B; --b1:#28170F; --b2:#422719; --b3:#70452B; --b4:#A87549; --b5:#C99A68;
+  --txt:#F1D7AC; --life:#C93636; --mana:#3678D4; --exp:#E0B23B; --bonus:#6FE07A;
+  --slot:clamp(40px,5.2vw,64px); --gap:clamp(3px,.5vw,6px);
+  --font:"Press Start 2P","Pixelify Sans","Courier New",monospace;
+
+  position:fixed;inset:0;z-index:1000;
+  display:flex;align-items:center;justify-content:center;padding:12px;
+  background:rgba(10,25,45,.30);
+  -webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+  color:var(--txt);font-family:var(--font);font-size:clamp(10px,1.15vw,14px);
+  image-rendering:pixelated;text-align:left;
+}
+#inv-overlay[hidden]{display:none}
+#inv-overlay, #inv-overlay *{box-sizing:border-box}
+
+/* Botão de fechar */
+#inv-overlay #inv-fechar{
+  position:absolute;top:16px;right:16px;width:44px;height:44px;padding:0;
+  font:inherit;font-size:1.2em;color:var(--txt);cursor:pointer;
+  background:var(--b2);border:4px solid var(--b0);
+  box-shadow:inset 0 0 0 3px var(--b4), 4px 4px 0 rgba(0,0,0,.5);
+}
+#inv-overlay #inv-fechar:hover{background:var(--life);color:#fff}
+
+#inv-overlay .ui{display:flex;gap:clamp(8px,1.2vw,16px);align-items:stretch;max-height:100%}
+#inv-overlay .right{display:flex;flex-direction:column;gap:clamp(8px,1.2vw,16px);min-width:0}
+
+/* Painéis de madeira: escuro nas bordas, claro no centro, com veios */
+#inv-overlay .panel{
+  padding:clamp(14px,1.6vw,22px);
+  background:
+    repeating-linear-gradient(90deg,rgba(0,0,0,.07) 0 2px,transparent 2px 9px),
+    radial-gradient(ellipse at center,var(--b3) 0%,var(--b2) 62%,var(--b1) 100%);
+  border:4px solid var(--b0);
+  box-shadow:
+    inset 0 0 0 3px var(--b4), inset 0 0 0 6px var(--b0),
+    inset 0 0 28px rgba(0,0,0,.45), 6px 6px 0 rgba(0,0,0,.5);
+}
+#inv-overlay h2{margin:0 0 12px;font-size:1.15em;font-weight:400;text-align:center;color:var(--b5);
+  text-shadow:2px 2px 0 var(--b0);letter-spacing:1px}
+
+/* Slots */
+#inv-overlay .slot{position:relative;width:var(--slot);height:var(--slot);background:var(--b1);
+  border:3px solid var(--b0);
+  box-shadow:inset 3px 3px 0 rgba(0,0,0,.6), inset -3px -3px 0 var(--b2);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:background .08s,box-shadow .08s}
+#inv-overlay .slot:hover{background:#3a2216;box-shadow:inset 3px 3px 0 rgba(0,0,0,.6), inset -3px -3px 0 var(--b3), 0 0 0 2px var(--b5)}
+#inv-overlay .slot.selected{box-shadow:inset 0 0 0 3px #F2C14E, 0 0 0 2px #F2C14E;background:#4a2f1c}
+#inv-overlay .slot.can-equip{box-shadow:inset 0 0 0 3px #6FBF5A, 0 0 0 2px #6FBF5A}
+#inv-overlay .slot.drop-ok{background:#2f4a22;box-shadow:inset 0 0 0 3px #6FBF5A}
+#inv-overlay .slot.drop-bad,#inv-overlay .slot.invalid{background:#4a1a1a;box-shadow:inset 0 0 0 3px var(--life);animation:inv-shake .25s}
+@keyframes inv-shake{25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+
+#inv-overlay .grid-inv{display:grid;grid-template-columns:repeat(5,var(--slot));gap:var(--gap)}
+#inv-overlay .grid-eq{display:grid;grid-template-columns:repeat(3,var(--slot));gap:calc(var(--gap)*2) var(--gap);justify-content:center}
+#inv-overlay .eq{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:.85em;text-align:center}
+#inv-overlay .eq .slot.empty .ph{width:60%;height:60%;opacity:.28}
+#inv-overlay .eq .slot.equipped{background:#4a3018;box-shadow:inset 0 0 0 3px #F2C14E}
+
+#inv-overlay .item{width:78%;height:78%;cursor:grab;position:relative}
+#inv-overlay .item svg,#inv-overlay .ph svg{width:100%;height:100%;display:block;shape-rendering:crispEdges;pointer-events:none}
+#inv-overlay .item:active{cursor:grabbing}
+#inv-overlay .item::after{content:attr(data-name);position:absolute;bottom:108%;left:50%;transform:translateX(-50%);
+  background:var(--b0);color:var(--txt);border:2px solid var(--b4);padding:6px 8px;white-space:pre;
+  line-height:1.7;text-align:left;font-size:.85em;opacity:0;pointer-events:none;z-index:5}
+#inv-overlay .slot:hover .item::after{opacity:1}
+
+/* Status */
+#inv-overlay .status-body{display:flex;gap:12px;margin-bottom:12px}
+#inv-overlay .portrait{flex:0 0 clamp(70px,9vw,110px);background:radial-gradient(circle,var(--b3),var(--b1));
+  border:3px solid var(--b0);box-shadow:inset 0 0 0 3px var(--b4);display:flex;align-items:center;justify-content:center;padding:8px}
+#inv-overlay .portrait svg,#inv-overlay .portrait img{width:100%;height:100%;object-fit:contain;shape-rendering:crispEdges}
+#inv-overlay .attrs{margin:0;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;align-content:start}
+#inv-overlay .attrs div{display:flex;flex-direction:column;gap:3px;background:rgba(0,0,0,.28);padding:5px 6px;border:2px solid var(--b0);min-width:0}
+#inv-overlay .attrs dt{font-size:.78em;color:var(--b5);line-height:1.3}
+#inv-overlay .attrs dd{margin:0;font-size:1em;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px}
+
+/* Bônus de itens em verde */
+#inv-overlay .bonus{color:var(--bonus);font-size:.85em;text-shadow:2px 2px 0 var(--b0)}
+
+#inv-overlay .bar{position:relative;height:clamp(18px,2.2vw,26px);background:var(--b0);border:3px solid var(--b0);
+  box-shadow:0 0 0 2px var(--b4);margin:10px 2px 0}
+#inv-overlay .bar .fill{position:absolute;inset:0;width:var(--pct,100%);
+  background:repeating-linear-gradient(90deg,transparent 0 6px,rgba(0,0,0,.18) 6px 8px),var(--c)}
+#inv-overlay .bar.life{--c:var(--life)}
+#inv-overlay .bar.mana{--c:var(--mana)}
+#inv-overlay .bar.exp{--c:var(--exp)}
+#inv-overlay .bar .label{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:.85em;text-shadow:2px 2px 0 #000}
+#inv-overlay .bar .label .bonus{font-size:1em;text-shadow:2px 2px 0 #000}
+
+@media (max-width:760px){
+  #inv-overlay .ui{flex-direction:column;overflow:auto}
+  #inv-overlay{align-items:flex-start}
+}

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restorya</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inventory.css">
 </head>
 <body>
     <main>
@@ -20,7 +21,7 @@
 
             <nav id="opcoes-acampamento">
                 <button>Descançar</button>
-                <button>Inventario</button>
+                <button id="botao-inventario">Inventario</button>
                 <button>Criar/Construir</button>
                 <button id="botao-explorar">Explorar/Viajar</button>
             </nav>
@@ -78,7 +79,37 @@
         </section>
     </main>
 
+    <!-- INVENTÁRIO (aberto pelo botão "Inventario" do acampamento) -->
+    <div id="inv-overlay" hidden>
+        <button id="inv-fechar" type="button" aria-label="Fechar inventário">X</button>
+
+        <div class="ui">
+            <section class="panel inventory">
+                <h2>INVENTÁRIO</h2>
+                <div class="grid-inv" id="inv-grid"></div>
+            </section>
+
+            <div class="right">
+                <section class="panel equipment">
+                    <h2>EQUIPAMENTOS</h2>
+                    <div class="grid-eq" id="inv-eq-grid"></div>
+                </section>
+
+                <section class="panel status">
+                    <h2>STATUS DO PERSONAGEM</h2>
+                    <div class="status-body">
+                        <div class="portrait" id="inv-portrait"><!-- Troque pelo <img src="Imagens/personagem.png"> definitivo --></div>
+                        <dl class="attrs" id="inv-attrs"></dl>
+                    </div>
+                    <div class="bar life"><span class="fill" id="inv-life-fill"></span><span class="label" id="inv-life-label"></span></div>
+                    <div class="bar mana"><span class="fill" id="inv-mana-fill"></span><span class="label" id="inv-mana-label"></span></div>
+                    <div class="bar exp"><span class="fill" id="inv-exp-fill"></span><span class="label" id="inv-exp-label"></span></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
 <script src="js/script.js"></script>
+<script src="js/inventory.js"></script>
 </body>
 </html>
-
