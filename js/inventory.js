@@ -8,6 +8,12 @@
 
   /* ===== Dados ===== */
   const INV_SIZE = 20;
+  const TIPOS_EMPILHAVEIS = [
+    "material",
+    "drop",
+    "pocao",
+    "comida"
+  ];
   const EQ_SLOTS = [
     { key: 'arma', label: 'Arma', icon: 'sword' }, { key: 'colar', label: 'Colar', icon: 'necklace' },
     { key: 'anel', label: 'Anel', icon: 'ring' }, { key: 'capacete', label: 'Capacete', icon: 'helmet' },
@@ -16,21 +22,20 @@
 
   // Para criar um item novo: mk(id, nome, tipo, ícone, slotCompatível, {bônus})
   // Nomes de bônus válidos: qualquer chave de BASE_STATS, ou 'Vida' (vida máxima).
-  const mk = (id, name, type, icon, equipSlot, bonus) => ({ id, name, type, icon, equipSlot, bonus });
+  const mk = (id, name, type, icon, equipSlot, bonus, imagem = null) => ({ id, name, type, icon, equipSlot, bonus, imagem });
   const ITEMS = [
-    mk('anel-vida-1',        'Anel de Vida',        'acessorio', 'ring',     'anel',     { 'Vida': 10 }),
-    mk('espada-ferro-1',     'Espada de Ferro',     'arma',      'sword',    'arma',     { 'Dano Físico': 8, 'Chance Crítica': 2.5 }),
-    mk('colar-vitalidade-1', 'Colar de Vitalidade', 'acessorio', 'necklace', 'colar',    { 'Vida': 20 }),
-    mk('capacete-ferro-1',   'Capacete de Ferro',   'armadura',  'helmet',   'capacete', { 'Defesa Física': 3, 'Defesa Mágica': 1 }),
-    mk('peitoral-ferro-1',   'Peitoral de Ferro',   'armadura',  'chest',    'peitoral', { 'Defesa Física': 6, 'Defesa Mágica': 2 }),
-    mk('botas-ferro-1',      'Botas de Ferro',      'armadura',  'boots',    'bota',     { 'Defesa Física': 2, 'Agilidade': 1 }),
+    mk('anel-vida-1',        'Anel de Vida',        'acessorio', 'ring',     'anel',     { 'HP': 10 }),
+    mk('espada-ferro-1',     'Espada de Ferro',     'arma',      'sword',    'arma',     { 'AT': 8, 'CC': 2.5 }, 'imagens/itens/espadateste.webp'),
+    mk('colar-vitalidade-1', 'Colar de Vitalidade', 'acessorio', 'necklace', 'colar',    { 'HP': 20 }),
+    mk('capacete-ferro-1',   'Capacete de Ferro',   'armadura',  'helmet',   'capacete', { 'FD': 3, 'MD': 1 }),
+    mk('peitoral-ferro-1',   'Peitoral de Ferro',   'armadura',  'chest',    'peitoral', { 'FD': 6, 'MD': 2 }),
+    mk('botas-ferro-1',      'Botas de Ferro',      'armadura',  'boots',    'bota',     { 'FD': 2, 'AG': 1 }),
   ];
 
   const BASE_STATS = {
-    'Nível': 1, 'Dano Físico': 12, 'Dano Mágico': 8, 'Defesa Física': 5, 'Defesa Mágica': 4,
-    'Agilidade': 10, 'Chance Crítica': 5, 'Dano Crítico': 150,
+    'Nível': 1, 'AT': 12, 'AP': 8, 'FD': 5, 'MD': 4, 'AG': 10, 'CC': 5, 'CA': 150,
   };
-  const UNIT = { 'Chance Crítica': '%', 'Dano Crítico': '%' };
+  const UNIT = { 'CC': '%', 'CA': '%' };
   // [atual, máximo] — apenas visual (a vida máxima recebe os bônus dos itens)
   const vitals = { life: [100, 100], mana: [80, 80], exp: [35, 100] };
   const BAR_NAMES = { life: 'VIDA', mana: 'MANA', exp: 'EXP' };
@@ -42,6 +47,14 @@
     open: false,
   };
   ITEMS.forEach((it, i) => { state.inventory[i] = it; });
+
+  console.table(state.inventory.filter(Boolean).map(item => ({
+    id: item.id,
+    name: item.name,
+    icon: item.icon,
+    bonus: item.bonus,
+    imagem: item.imagem
+})));
 
   const fmt = n => n.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
 
@@ -86,13 +99,22 @@
     },
   };
   function pixelSVG(name) {
+    if (!ART[name]) {
+        console.error("Ícone não encontrado em ART:", name);
+        return "";
+    }
+
     const { pal, rows } = ART[name];
-    let r = '';
+    let r = "";
+
     rows.forEach((row, y) => [...row].forEach((ch, x) => {
-      if (pal[ch]) r += `<rect x="${x}" y="${y}" width="1" height="1" fill="${pal[ch]}"/>`;
+        if (pal[ch]) {
+            r += `<rect x="${x}" y="${y}" width="1" height="1" fill="${pal[ch]}"/>`;
+        }
     }));
+
     return `<svg viewBox="0 0 ${rows[0].length} ${rows.length}" xmlns="http://www.w3.org/2000/svg">${r}</svg>`;
-  }
+}
 
   /* ===== Acesso aos dados ===== */
   const getItem = l => (l.kind === 'inv' ? state.inventory[l.key] : state.equipment[l.key]);
@@ -124,6 +146,88 @@
     if (free === -1) return false;          // inventário cheio: mantém equipado
     return moveItem({ kind: 'eq', key: slotKey }, { kind: 'inv', key: free });
   }
+  function adicionarItem(item) {
+    const empilhavel = TIPOS_EMPILHAVEIS.includes(item.type);
+
+    const quantidade = Number.isInteger(item.quantity) && item.quantity > 0
+        ? item.quantity
+        : 1;
+
+    // Se for empilhável, procura uma pilha do mesmo item.
+    if (empilhavel) {
+        const pilhaExistente = state.inventory.find(function(itemInventario) {
+            return itemInventario &&
+                itemInventario.id === item.id &&
+                TIPOS_EMPILHAVEIS.includes(itemInventario.type);
+        });
+
+        if (pilhaExistente) {
+            pilhaExistente.quantity =
+                (pilhaExistente.quantity || 1) + quantidade;
+
+            render();
+            return true;
+        }
+    }
+
+    // Só procura um espaço livre se precisar criar uma nova entrada.
+    const espacoLivre = state.inventory.indexOf(null);
+
+    if (espacoLivre === -1) {
+        return false;
+    }
+
+    const novoItem = { ...item };
+
+    if (empilhavel) {
+        novoItem.quantity = quantidade;
+    } else {
+        delete novoItem.quantity;
+    }
+
+    state.inventory[espacoLivre] = novoItem;
+
+    render();
+    return true;
+  }
+  function removerItem(idItem, quantidade = 1) {
+    const indice = state.inventory.findIndex(function(item) {
+        return item && item.id === idItem;
+    });
+
+    if (indice === -1) {
+        return false;
+    }
+
+    const item = state.inventory[indice];
+    const quantidadeAtual = item.quantity || 1;
+
+    // "all" remove a pilha inteira.
+    if (quantidade === "all") {
+        state.inventory[indice] = null;
+        render();
+        return true;
+    }
+
+    // Impede quantidades inválidas.
+    if (!Number.isInteger(quantidade) || quantidade <= 0) {
+        return false;
+    }
+
+    // Não permite remover mais unidades do que existem.
+    if (quantidade > quantidadeAtual) {
+        return false;
+    }
+
+    if (quantidade === quantidadeAtual) {
+        state.inventory[indice] = null;
+    } else {
+        item.quantity = quantidadeAtual - quantidade;
+    }
+
+    render();
+    return true;
+  }
   function selectItem(l) { state.selected = l; render(); }
   const clearSelection = () => { state.selected = null; render(); };
 
@@ -132,7 +236,12 @@
   const overlay = $('inv-overlay');
 
   function tooltipText(it) {
-    const lines = Object.entries(it.bonus).map(([k, v]) => `+${fmt(v)}${UNIT[k] || ''} ${k === 'Vida' ? 'Vida máxima' : k}`);
+    const lines = Object.entries(it.bonus).map(([k, v]) => {
+    const sinal = v > 0 ? '+' : '';
+    const nome = k === 'HP' ? 'Vida máxima' : k;
+
+    return `${sinal}${fmt(v)}${UNIT[k] || ''} ${nome}`;
+  });
     return [it.name, ...lines].join('\n');
   }
   function slotHTML(l) {
@@ -142,7 +251,24 @@
     const can = l.kind === 'eq' && selItem && selItem.equipSlot === l.key && !sel;
     const cls = ['slot', it ? '' : 'empty', sel ? 'selected' : '', can ? 'can-equip' : '', it && l.kind === 'eq' ? 'equipped' : ''].join(' ');
     let inner = '';
-    if (it) inner = `<div class="item" draggable="true" data-name="${tooltipText(it)}">${pixelSVG(it.icon)}</div>`;
+    if (it) {
+    const quantidade = it.quantity || 1;
+
+    const contador = TIPOS_EMPILHAVEIS.includes(it.type) && quantidade > 1
+        ? `<span class="item-quantidade">x${quantidade}</span>`
+        : "";
+
+    const desenho = it.imagem
+    ? `<img src="${it.imagem}" alt="${it.name}" class="sprite-item">`
+    : pixelSVG(it.icon);
+
+    inner = `
+      <div class="item" draggable="true" data-name="${tooltipText(it)}">
+          ${desenho}
+          ${contador}
+      </div>
+    `;
+  }
     else if (l.kind === 'eq') inner = `<div class="ph">${pixelSVG(EQ_SLOTS.find(s => s.key === l.key).icon)}</div>`;
     return `<div class="${cls}" data-kind="${l.kind}" data-key="${l.key}">${inner}</div>`;
   }
@@ -155,18 +281,38 @@
   }
   function renderStatus() {
     const b = totalBonus();
+
     $('inv-attrs').innerHTML = Object.entries(BASE_STATS).map(([k, base]) => {
-      const u = UNIT[k] || '', bn = b[k] || 0;
-      return `<div><dt>${k}</dt><dd><span>${fmt(base + bn)}${u}</span>${bn ? `<span class="bonus">+${fmt(bn)}${u}</span>` : ''}</dd></div>`;
+        const u = UNIT[k] || '';
+        const bn = b[k] || 0;
+
+        return `<div><dt>${k}</dt><dd><span>${fmt(base + bn)}${u}</span>${bn ? `<span class="bonus">${bn > 0 ? '+' : ''}${fmt(bn)}${u}</span>` : ''}</dd></div>`;
     }).join('');
+
     $('inv-portrait').innerHTML = pixelSVG('hero');
+
     for (const k of Object.keys(vitals)) {
-      const bn = k === 'life' ? (b['Vida'] || 0) : 0;
-      const cur = vitals[k][0] + bn, max = vitals[k][1] + bn;
-      $('inv-' + k + '-fill').style.setProperty('--pct', (cur / max * 100) + '%');
-      $('inv-' + k + '-label').innerHTML = `${BAR_NAMES[k]} ${cur}/${max}` + (bn ? ` <span class="bonus">+${bn}</span>` : '');
+        let bn = 0;
+
+        if (k === 'life') {
+            bn = b['HP'] || 0;
+        } else if (k === 'mana') {
+            bn = b['MP'] || 0;
+        }
+
+        const cur = vitals[k][0] + bn;
+        const max = vitals[k][1] + bn;
+
+        $('inv-' + k + '-fill').style.setProperty(
+            '--pct',
+            (cur / max * 100) + '%'
+        );
+
+        $('inv-' + k + '-label').innerHTML =
+            `${BAR_NAMES[k]} ${cur}/${max}` +
+            (bn ? ` <span class="bonus">${bn > 0 ? '+' : ''}${bn}</span>` : '');
     }
-  }
+}
   function render() { renderInventory(); renderEquipment(); renderStatus(); }
 
   /* ===== Interação: clique ===== */
@@ -235,4 +381,13 @@
 
   /* ===== Início ===== */
   render();
+
+  window.inventario = {
+    adicionarItem: adicionarItem,
+    removerItem: removerItem,
+
+    obterItens: function() {
+        return state.inventory;
+    }
+  };
 })();
