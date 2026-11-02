@@ -1,10 +1,9 @@
 body{
     background-color: rgb(48, 48, 48);
     margin: 0px;
-    background-image: url('../Imagens/MENU_restorya\ \(2\).png');
+    background-image: url('../Imagens/Menu_Restorya.png');
     background-size: cover;
     background-position: center;
-    background-position-y: -180px;
 }
 
 .MenuPrincipal{
@@ -256,6 +255,8 @@ body{
 #itens-mercador {
     width: 100%;
     max-width: 500px;
+    max-height: 300px;
+    overflow-y: auto;
     margin-bottom: 20px;
 }
 
@@ -297,61 +298,274 @@ body{
     width: 100%;
     max-width: 500px;
     margin-bottom: 20px;
-    max-height: 320px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 5px;
-    box-sizing: border-box;
 }
 
 .item-cacador {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 90px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 8px;
+    gap: 20px;
     padding: 12px;
     margin-bottom: 8px;
-    box-sizing: border-box;
-    width: 100%;
-
     background-color: rgba(20, 17, 13, 0.85);
     border: 1px solid #c5a45b;
     color: white;
 }
 
-.item-cacador span:first-child {
-    min-width: 0;
-    overflow-wrap: anywhere;
+#tela-combate {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    background-image: url("../Imagens/area-florestal/area-batalha/area2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.item-cacador span:nth-child(2) {
-    grid-column: 1;
-    grid-row: 2;
-    white-space: normal;
-    font-size: 13px;
+#tela-combate h1 {
+    color: #f0d58a;
+    font-size: 36px;
+    text-shadow: 3px 3px 0 black;
 }
 
-.item-cacador input[type="number"] {
-    grid-column: 2;
-    grid-row: 1;
+#area-combate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 100px;
     width: 100%;
-    min-width: 0;
-    padding: 7px;
+    max-width: 900px;
+    margin: 30px 0;
+}
+
+#informacoes-jogador,
+#informacoes-inimigo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(20, 17, 13, 0.85);
+    border: 2px solid #c5a45b;
+    padding: 20px;
+    width: 220px;
     box-sizing: border-box;
 }
 
-.item-cacador button {
-    grid-column: 1 / -1;
-    width: 100%;
-    min-width: 0;
-    padding: 7px 8px;
-    box-sizing: border-box;
-    font-size: 12px;
-    white-space: normal;
+#informacoes-jogador p,
+#informacoes-inimigo p {
+    margin: 8px 0;
+    font-size: 16px;
 }
 
-#itens-mercador, #itens-cacador {
-    max-height: 320px;
+#informacoes-jogador h2,
+#informacoes-inimigo h2 {
+    color: #f0d58a;
+}
+
+#acoes-combate {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+#tela-combate button {
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#tela-combate button:hover {
+    background-color: #51432b;
+    color: #f0d58a;
+}
+
+#log-combate {
+    width: 100%;
+    max-width: 500px;
+    min-height: 60px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgba(20, 17, 13, 0.85);
+    border: 1px solid #c5a45b;
+    max-height: 180px;
     overflow-y: auto;
-    overflow-x: hidden;
+}
+
+#tela-florestal {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+
+    background-image: url("../Imagens/area-florestal/area-batalha/area1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#tela-florestal h1 {
+    color: #f0d58a;
+    font-size: 36px;
+    text-shadow: 3px 3px 0 black;
+}
+
+#tela-florestal p {
+    max-width: 500px;
+    font-size: 18px;
+    line-height: 1.5;
+    text-shadow: 2px 2px 3px black;
+}
+
+#opcoes-florestal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#opcoes-florestal button {
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#opcoes-florestal button:hover {
+    background-color: #51432b;
+    color: #f0d58a;
+}
+
+#sprite-jogador,
+#sprite-inimigo {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    image-rendering: pixelated;
+}
+
+.barra-status {
+    position: relative;
+    width: 180px;
+    height: 22px;
+    margin: 10px 0;
+    background-color: #29251f;
+    border: 2px solid #c5a45b;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.preenchimento-barra {
+    height: 100%;
+    width: 100%;
+    transition: width 0.3s ease;
+}
+
+.preenchimento-barra.vida {
+    background-color: #a83232;
+}
+
+.preenchimento-barra.mana {
+    background-color: #2866b2;
+}
+
+.barra-status span {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+}
+
+#selecao-camadas {
+    width: 100%;
+    max-width: 450px;
+    margin-top: 15px;
+    padding: 18px;
+    box-sizing: border-box;
+
+    background-color: rgba(20, 17, 13, 0.88);
+    border: 2px solid #c5a45b;
+    border-radius: 6px;
+}
+
+#selecao-camadas h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #f0d58a;
+    font-size: 22px;
+    text-shadow: 2px 2px 3px black;
+}
+
+#progresso-camada {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 18px;
+
+    background-color: rgba(20, 17, 13, 0.88);
+    border: 1px solid #c5a45b;
+    border-radius: 4px;
+
+    color: #f0d58a;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+}
+
+#lista-camadas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#lista-camadas button {
+    min-width: 110px;
+    padding: 12px 18px;
+
+    color: white;
+    background-color: #29251f;
+    border: 2px solid #8b7545;
+    border-radius: 4px;
+
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#lista-camadas button:hover:not(:disabled) {
+    background-color: #51432b;
+    border-color: #f0d58a;
+    color: #f0d58a;
+    transform: translateY(-2px);
+}
+
+#lista-camadas button:disabled {
+    background-color: #6b542b;
+    border-color: #f0d58a;
+    color: #ffe5a0;
+    cursor: default;
+    opacity: 1;
 }

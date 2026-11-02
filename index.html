@@ -82,6 +82,94 @@
         </section>
     </main>
 
+    <section id="tela-combate">
+    <h1>Combate</h1>
+
+    <button id="botao-voltar-floresta">Voltar aos Campos Selvagens</button>
+
+    <div id="aviso-proxima-camada" style="display: none;">
+        <p>Você derrotou 5 inimigos! A próxima camada foi desbloqueada.</p>
+        
+        <button id="botao-avancar-camada">Avançar para a próxima camada</button>
+    </div>
+
+        <div id="area-combate">
+
+    <div id="informacoes-jogador">
+        <h2>Herói</h2>
+
+        <img id="sprite-jogador"
+            src="Imagens/heroi/heroiR.png"
+            alt="Herói">
+
+        <div class="barra-status">
+            <div id="barra-vida-jogador" class="preenchimento-barra vida"></div>
+                <span id="vida-jogador">100/100</span>
+        </div>
+
+        <div class="barra-status">
+            <div id="barra-mana-jogador" class="preenchimento-barra mana"></div>
+                <span id="mana-jogador">80/80</span>
+        </div>
+    </div>
+
+    <div id="informacoes-inimigo">
+        <h2 id="nome-inimigo">Inimigo</h2>
+
+        <img id="imagem-inimigo" src="" alt="Inimigo">
+
+        <div class="barra-status">
+            <div id="barra-vida-inimigo" class="preenchimento-barra vida"></div>
+            <span id="vida-inimigo">50/50</span>
+        </div>
+    </div>
+
+</div>
+
+        <div id="acoes-combate">
+            <button id="botao-atacar">Atacar</button>
+            <button id="botao-habilidade">Habilidades</button>
+            <button id="botao-itens-combate">Itens</button>
+
+            <div id="menu-itens" style="display: none;">
+                <h3>Itens</h3>
+
+                <div id="lista-itens-combate"></div>
+
+                    <button id="botao-fechar-itens">Voltar</button>
+            </div>
+            
+            <button id="botao-novo-combate">Novo combate</button>
+
+            <div id="menu-habilidades" style="display: none;">
+                <h3>Habilidades</h3>
+
+                <div id="lista-habilidades"></div>
+                    <button id="botao-fechar-habilidades">Voltar</button>
+            </div>
+        </div>
+
+        <div id="log-combate">
+            <p>O combate começou!</p>
+        </div>
+    </section>
+
+    <section id="tela-florestal">
+    <h1>Campos Selvagens</h1>
+
+    <p>Uma região perigosa, repleta de criaturas e recursos para explorar.</p>
+    <p id="progresso-camada">Camada 1 — Inimigos derrotados: 0/5</p>
+    <div id="selecao-camadas">
+        <h2>Camadas da floresta</h2>
+        <div id="lista-camadas"></div>
+    </div>
+
+        <nav id="opcoes-florestal">
+            <button id="botao-explorar-floresta">Explorar região</button>
+            <button id="botao-voltar-bifurcacao-floresta">Voltar à bifurcação</button>
+        </nav>
+    </section>
+
     <!-- INVENTÁRIO (aberto pelo botão "Inventario" do acampamento) -->
     <div id="inv-overlay" hidden>
         <button id="inv-fechar" type="button" aria-label="Fechar inventário">X</button>
@@ -90,6 +178,8 @@
             <section class="panel inventory">
                 <h2>INVENTÁRIO</h2>
                 <div class="grid-inv" id="inv-grid"></div>
+
+                <button id="inv-descartar" type="button" disabled>Descartar</button>
             </section>
 
             <div class="right">
@@ -110,10 +200,25 @@
                 </section>
             </div>
         </div>
+            <div id="modal-descarte" class="modal-descarte" hidden>
+            <h3>DESCARTAR ITEM</h3>
+
+            <p id="descarte-nome"></p>
+            <p id="descarte-quantidade"></p>
+
+            <label for="descarte-input">Quantidade:</label>
+            <input type="number" id="descarte-input" min="1" value="1">
+
+            <div class="botoes-descarte">
+                <button id="descarte-confirmar" type="button">Confirmar</button>
+                <button id="descarte-cancelar" type="button">Cancelar</button>
+            </div>
+        </div>
     </div>
 
-<script src="js/script.js"></script>
 <script src="js/inventory.js"></script>
+<script src="js/script.js"></script>
 <script src="js/base.js"></script>
+<script src="js/combat.js"></script>
 </body>
 </html>
