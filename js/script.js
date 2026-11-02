@@ -1,5 +1,103 @@
 //Funções de navegação
 
+const inimigosNecessariosPorCamada = 20;
+
+const progressoFloresta = {
+    camadaAtual: 1,
+    maiorCamadaDesbloqueada: 1,
+
+    derrotasPorCamada: {
+        1: 0
+    }
+};
+
+function registrarDerrotaInimigo() {
+    const camada = progressoFloresta.camadaAtual;
+    const derrotas = progressoFloresta.derrotasPorCamada[camada];
+
+    if (derrotas >= inimigosNecessariosPorCamada) {
+        return;
+    }
+
+    progressoFloresta.derrotasPorCamada[camada]++;
+
+    if (progressoFloresta.derrotasPorCamada[camada] === inimigosNecessariosPorCamada && camada < 5) {
+        const aviso = document.querySelector("#aviso-proxima-camada");
+        aviso.style.display = "block";
+    }
+
+    atualizarProgressoFloresta();
+
+    console.log(
+        `Camada ${camada}: ${progressoFloresta.derrotasPorCamada[camada]}/${inimigosNecessariosPorCamada} inimigos derrotados`
+    );
+}
+
+function atualizarProgressoFloresta() {
+    const camada = progressoFloresta.camadaAtual;
+    const derrotas = progressoFloresta.derrotasPorCamada[camada];
+
+    document.querySelector("#progresso-camada").textContent =
+        `Camada ${camada} — Inimigos derrotados: ${derrotas}/${inimigosNecessariosPorCamada}`;
+}
+
+function atualizarSelecaoCamadas() {
+    const lista = document.querySelector("#lista-camadas");
+
+    lista.innerHTML = "";
+
+    for (let camada = 1; camada <= progressoFloresta.maiorCamadaDesbloqueada; camada++) {
+        const botao = document.createElement("button");
+
+        botao.textContent = `Camada ${camada}`;
+
+        botao.addEventListener("click", function() {
+            progressoFloresta.camadaAtual = camada;
+
+            atualizarProgressoFloresta();
+            atualizarSelecaoCamadas();
+        });
+
+        if (camada === progressoFloresta.camadaAtual) {
+            botao.disabled = true;
+        }
+
+        lista.appendChild(botao);
+    }
+}
+
+function avancarCamada() {
+    const camadaAtual = progressoFloresta.camadaAtual;
+
+    if (camadaAtual >= 5) {
+        return;
+    }
+
+    const derrotas = progressoFloresta.derrotasPorCamada[camadaAtual];
+
+    if (derrotas < inimigosNecessariosPorCamada) {
+        return;
+    }
+
+    const proximaCamada = camadaAtual + 1;
+
+    progressoFloresta.camadaAtual = proximaCamada;
+
+    if (proximaCamada > progressoFloresta.maiorCamadaDesbloqueada) {
+        progressoFloresta.maiorCamadaDesbloqueada = proximaCamada;
+    }
+
+    if (!progressoFloresta.derrotasPorCamada[proximaCamada]) {
+        progressoFloresta.derrotasPorCamada[proximaCamada] = 0;
+    }
+
+    atualizarProgressoFloresta();
+
+    atualizarSelecaoCamadas();
+
+    console.log(`Você avançou para a camada ${proximaCamada}!`);
+}
+
 function iniciarJogo() {
     document.querySelector("#menu-principal").style.display = "none";
     document.querySelector("#tela-jogo").style.display = "flex";
@@ -12,6 +110,17 @@ function abrirBifurcacao() {
 
 function voltarAcampamento() {
     document.querySelector("#tela-bifurcacao").style.display = "none";
+    document.querySelector("#tela-jogo").style.display = "flex";
+}
+
+function respawnAcampamento() {
+    document.querySelector("#tela-combate").style.display = "none";
+    document.querySelector("#tela-florestal").style.display = "none";
+    document.querySelector("#tela-bifurcacao").style.display = "none";
+    document.querySelector("#tela-cidade").style.display = "none";
+    document.querySelector("#tela-mercador").style.display = "none";
+    document.querySelector("#tela-cacador").style.display = "none";
+
     document.querySelector("#tela-jogo").style.display = "flex";
 }
 
@@ -45,6 +154,33 @@ function voltarDoCacador() {
     document.querySelector("#tela-cidade").style.display = "flex";
 }
 
+function abrirAreaFlorestal() {
+    document.querySelector("#tela-bifurcacao").style.display = "none";
+    document.querySelector("#tela-florestal").style.display = "flex";
+
+    atualizarProgressoFloresta();
+    atualizarSelecaoCamadas();
+}
+
+function voltarBifurcacaoFlorestal() {
+    document.querySelector("#tela-florestal").style.display = "none";
+    document.querySelector("#tela-bifurcacao").style.display = "flex";
+}
+
+function voltarParaFloresta() {
+    document.querySelector("#tela-combate").style.display = "none";
+    document.querySelector("#tela-florestal").style.display = "flex";
+}
+
+function voltarParaFloresta() {
+    if (!podeSairDoCombate()) {
+        return;
+    }
+
+    document.querySelector("#tela-combate").style.display = "none";
+    document.querySelector("#tela-florestal").style.display = "flex";
+}
+
 
 //Eventos de transição
 
@@ -75,6 +211,28 @@ document.querySelector("#botao-voltar-mercador")
 document.querySelector("#botao-voltar-cacador")
     .addEventListener("click", voltarDoCacador);
 
+document.querySelector("#botao-florestal")
+    .addEventListener("click", abrirAreaFlorestal);
+
+document.querySelector("#botao-voltar-bifurcacao-floresta")
+    .addEventListener("click", voltarBifurcacaoFlorestal);
+
+document.querySelector("#botao-explorar-floresta")
+    .addEventListener("click", explorarFloresta);
+
+document.querySelector("#botao-avancar-camada").addEventListener("click", function() {
+    avancarCamada();
+
+    document.querySelector("#aviso-proxima-camada").style.display = "none";
+
+    document.querySelector("#tela-combate").style.display = "none";
+    document.querySelector("#tela-florestal").style.display = "flex";
+});
+
+document.querySelector("#botao-voltar-floresta")
+    .addEventListener("click", voltarParaFloresta);
+
+
     //Sistema de moedas do jogador
 
 let moedasJogador = 10000000;
@@ -87,128 +245,101 @@ function atualizarMoedas() {
         moedasJogador + " moedas";
 }
 
+function aplicarPenalidadeMoedas() {
+    moedasJogador = Math.floor(moedasJogador * 0.5);
+
+    atualizarMoedas();
+}
+
 
 //Criação de item
 
 function criarItem({
     id,
     nome,
-    tipo,
-    icone = "hero",
-    imagem = null,
     precoCompra = 0,
-    precoVenda = 0,
-    equipSlot = null,
-    bonus = {}
+    precoVenda = 0
 }) {
     return {
+        idItem: id,
         nome: nome,
         preco: precoCompra,
-        precoVenda: precoVenda,
-
-        itemInventario: {
-            id: id,
-            name: nome,
-            type: tipo,
-            icon: icone,
-            imagem: imagem,
-            equipSlot: equipSlot,
-            bonus: bonus
-        }
+        precoVenda: precoVenda
     };
 }
-
-const testePocao = criarItem({
-    id: "pocao-vida-basica",
-    nome: "Poção de Vida Básica",
-    tipo: "pocao",
-    precoCompra: 15,
-    precoVenda: 5
-});
-
-console.log(testePocao);
 
 
 //Sistema loja do mercador
 
 const produtosMercador = {
     pocoes: [
-            criarItem({
-                id: "pocao-vida-basica",
-                nome: "Poção de Vida Básica",
-                tipo: "pocao",
-                precoCompra: 15,
-                precoVenda: 5
-            }),
-            criarItem({
-                id: "pocao-mana-basica",
-                nome: "Poção de Mana Básica",
-                tipo: "pocao",
-                precoCompra: 15,
-                precoVenda: 5
-            }),
-            criarItem({
-                id: "pocao-vida-intermediaria",
-                nome: "Poção de Vida Intermediária",
-                tipo: "pocao",
-                precoCompra: 30,
-                precoVenda: 10
-            }),
-            criarItem({
-                id: "pocao-mana-intermediaria",
-                nome: "Poção de Mana Intermediária",
-                tipo: "pocao",
-                precoCompra: 30,
-                precoVenda: 10
-            }),
-            criarItem({
-                id: "pocao-vida-avancada",
-                nome: "Poção de Vida Avançada",
-                tipo: "pocao",
-                precoCompra: 70,
-                precoVenda: 30
-            }),
-            criarItem({
-                id: "pocao-mana-avancada",
-                nome: "Poção de Mana Avançada",
-                tipo: "pocao",
-                precoCompra: 70,
-                precoVenda: 30
-            }),
+        criarItem({
+            id: "pocao-vida-basica-1",
+            nome: "Poção de Vida Básica",
+            precoCompra: 15,
+            precoVenda: 5
+        }),
+        criarItem({
+            id: "pocao-mana-basica-1",
+            nome: "Poção de Mana Básica",
+            precoCompra: 15,
+            precoVenda: 5
+        }),
+        criarItem({
+            id: "pocao-vida-intermediaria-1",
+            nome: "Poção de Vida Intermediária",
+            precoCompra: 30,
+            precoVenda: 10
+        }),
+        criarItem({
+            id: "pocao-mana-intermediaria-1",
+            nome: "Poção de Mana Intermediária",
+            precoCompra: 30,
+            precoVenda: 10
+        }),
+        criarItem({
+            id: "pocao-vida-avancada-1",
+            nome: "Poção de Vida Avançada",
+            precoCompra: 70,
+            precoVenda: 30
+        }),
+        criarItem({
+            id: "pocao-mana-avancada-1",
+            nome: "Poção de Mana Avançada",
+            precoCompra: 70,
+            precoVenda: 30
+        })
     ],
 
+
     alimentos: [
-            criarItem({
-                id: "maca",
-                nome: "Maçã",
-                tipo: "comida",
-                precoCompra: 10,
-                precoVenda: 3
-            }),
-            criarItem({
-                id: "banana",
-                nome: "Banana",
-                tipo: "comida",
-                precoCompra: 10,
-                precoVenda: 3
-            }),
+        criarItem({
+            id: "maca",
+            nome: "Maçã",
+            precoCompra: 10,
+            precoVenda: 3
+        }),
+        criarItem({
+            id: "banana",
+            nome: "Banana",
+            precoCompra: 10,
+            precoVenda: 3
+        })
     ],
 
     materiais: [
-            criarItem({
-                id: "pedra",
-                nome: "Pedra",
-                tipo: "material",
-                precoCompra: 5,
-                precoVenda: 1
-            }),
-            criarItem({
-                id: "madeira",
-                nome: "Madeira",
-                tipo: "material",
-                precoCompra: 5,
-                precoVenda: 1
-            })
+        criarItem({
+            id: "pedra",
+            nome: "Pedra",
+            precoCompra: 5,
+            precoVenda: 1
+        }),
+        criarItem({
+            id: "madeira",
+            nome: "Madeira",
+            precoCompra: 5,
+            precoVenda: 1
+        })
     ]
 };
 
@@ -259,73 +390,34 @@ mostrarProdutosMercador("pocoes");
 
 const produtosCacador = {
     armas: [
-            criarItem({
-                id: "espada-media-1",
-                nome: "Espada Média",
-                tipo: "arma",
-                icone: "sword",
-                precoCompra: 100,
-                precoVenda: 40,
-                equipSlot: "arma",
-                bonus: { "AT": 6 }
-            }),
-            criarItem({
-                id: "espada-longa-1",
-                nome: "Espada Longa",
-                tipo: "arma",
-                icone: "sword",
-                precoCompra: 150,
-                precoVenda: 55,
-                equipSlot: "arma",
-                bonus: { "AT": 10, "AG": -5, "CC": 4 }
-            }),
-            criarItem({
-                id: "cajado-basico-1",
-                nome: "Cajado Básico",
-                tipo: "arma",
-                icone: "sword", //Temporario
-                precoCompra: 100,
-                precoVenda: 40,
-                equipSlot: "arma",
-                bonus: { "AP": 7, "MD": 5 }
-            }),
-            criarItem({
-                id: "cajado-magico-1",
-                nome: "Cajado Mágico",
-                tipo: "arma",
-                icone: "sword", //Temporario
-                precoCompra: 150,
-                precoVenda: 55,
-                equipSlot: "arma",
-                bonus: { "AP": 12, "MP": 7 }    
-            })
+        criarItem({
+            id: "espada-media-1",
+            nome: "Espada Média",
+            precoCompra: 100,
+            precoVenda: 40
+        }),
+        criarItem({
+            id: "espada-longa-1",
+            nome: "Espada Longa",
+            precoCompra: 150,
+            precoVenda: 55
+        }),
+        criarItem({
+            id: "cajado-basico-1",
+            nome: "Cajado Básico",
+            precoCompra: 100,
+            precoVenda: 40
+        }),
+        criarItem({
+            id: "cajado-magico-1",
+            nome: "Cajado Mágico",
+            precoCompra: 150,
+            precoVenda: 55
+        })
     ],
-    drops: [
-            criarItem({
-                id: "dente-slime-1",
-                nome: "Dente de Slime",
-                tipo: "material",
-                precoVenda: 10,
-                icone: "sword" //Temporario
-            })
-]
+
+    drops: []
 };
-
-function adicionarDropTeste() {
-    const produto = produtosCacador.drops.find(
-        item => item.itemInventario.id === "dente-slime-1"
-    );
-
-    const adicionado = window.inventario.adicionarItem(
-        produto.itemInventario
-    );
-
-    if (adicionado) {
-        alert("Dente de Slime adicionado ao inventário!");
-    } else {
-        alert("Inventário cheio!");
-    }
-}
 
 function venderDrop(produto, quantidade) {
     const inventario = window.inventario;
@@ -341,7 +433,7 @@ function venderDrop(produto, quantidade) {
     }
 
     const removido = inventario.removerItem(
-        produto.itemInventario.id,
+        produto.idItem,
         quantidade
     );
 
@@ -360,19 +452,6 @@ function venderDrop(produto, quantidade) {
     );
 }
 
-function venderDropTeste() {
-    const drop = produtosCacador.drops.find(
-        item => item.itemInventario.id === "dente-slime-1"
-    );
-
-    if (!drop) {
-        alert("Drop de teste não encontrado!");
-        return;
-    }
-
-    venderDrop(drop, 1);
-}
-
 function mostrarProdutosCacador(categoria) {
     const areaItens = document.querySelector("#itens-cacador");
 
@@ -386,7 +465,7 @@ function mostrarProdutosCacador(categoria) {
     const produtos = produtosCacador.drops.filter(function(produto) {
         return itensInventario.some(function(itemInventario) {
             return itemInventario &&
-                itemInventario.id === produto.itemInventario.id
+                itemInventario.id === produto.idItem;
         });
     });
 
@@ -399,6 +478,10 @@ function mostrarProdutosCacador(categoria) {
     }
 
     produtos.forEach(function(produto) {
+        const itemInventario = itensInventario.find(function(item) {
+            return item && item.id === produto.idItem;
+        });
+
         const item = document.createElement("div");
         item.classList.add("item-cacador");
 
@@ -413,17 +496,13 @@ function mostrarProdutosCacador(categoria) {
         quantidade.min = "1";
         quantidade.step = "1";
         quantidade.value = "1";
-        quantidade.setAttribute(
-            "aria-label",
-            "Quantidade para vender"
-        );
+        quantidade.setAttribute("aria-label", "Quantidade para vender");
 
         const botaoVender = document.createElement("button");
         botaoVender.textContent = "Vender quantidade";
 
         botaoVender.addEventListener("click", function() {
-            const valor = Number(quantidade.value);
-            venderDrop(produto, valor);
+            venderDrop(produto, Number(quantidade.value));
             mostrarProdutosCacador("drops");
         });
 
@@ -431,24 +510,7 @@ function mostrarProdutosCacador(categoria) {
         botaoVenderTudo.textContent = "Vender tudo";
 
         botaoVenderTudo.addEventListener("click", function() {
-            const itens = window.inventario.obterItens();
-
-            const encontrado = itens.find(function(itemInventario) {
-                return itemInventario &&
-                    itemInventario.id === produto.itemInventario.id
-            });
-
-            if (!encontrado) {
-                alert("Você não possui esse item no inventário!");
-                mostrarProdutosCacador("drops");
-                return;
-            }
-
-            venderDrop(
-                produto,
-                encontrado.quantity || 1
-            );
-
+            venderDrop(produto, itemInventario.quantity || 1);
             mostrarProdutosCacador("drops");
         });
 
@@ -463,6 +525,7 @@ function mostrarProdutosCacador(categoria) {
 
     return;
 }
+    
     produtos.forEach(function(produto) {
         const item = document.createElement("div");
         item.classList.add("item-cacador");
@@ -506,13 +569,13 @@ function comprarProduto(produto) {
         return;
     }
 
-    if (!produto.itemInventario) {
+    if (!produto.idItem) {
         alert("Este item ainda não pode ser comprado.");
         return;
     }
 
-    const itemAdicionado = window.inventario.adicionarItem(
-        produto.itemInventario
+    const itemAdicionado = window.inventario.adicionarItemPorId(
+        produto.idItem
     );
 
     if (!itemAdicionado) {
@@ -525,4 +588,17 @@ function comprarProduto(produto) {
     atualizarMoedas();
 
     alert("Você comprou: " + produto.nome);
+}
+
+function explorarFloresta() {
+    const inimigo = selecionarInimigo();
+
+    if (!inimigo) {
+        return;
+    }
+
+    document.querySelector("#tela-florestal").style.display = "none";
+    document.querySelector("#tela-combate").style.display = "flex";
+
+    iniciarCombate(inimigo);
 }

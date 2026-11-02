@@ -27,24 +27,16 @@
      ##   Ex.: [{ id: 'barra-de-ferro', qtd: 3 }]            ##
      ##########################################################
      ########################################################## */
-  const CUSTOS_RECEITAS_BIGORNA = {
-    'espada-ferro-forja':   [{ id: 'madeira', qtd: 3 }],   // <<< Espada de Ferro
-    'capacete-ferro-forja': [{ id: 'madeira', qtd: 2 }],   // <<< Capacete de Ferro
-    'peitoral-ferro-forja': [{ id: 'madeira', qtd: 4 }],   // <<< Peitoral de Ferro
-    'botas-ferro-forja':    [{ id: 'madeira', qtd: 2 }],   // <<< Botas de Ferro
-    'anel-ferro-forja':     [{ id: 'madeira', qtd: 1 }],   // <<< Anel de Ferro
-    'colar-ferro-forja':    [{ id: 'madeira', qtd: 2 }],   // <<< Colar de Ferro
-  };
+  const CUSTOS_RECEITAS_BIGORNA = {};
 
   /* ----- Materiais conhecidos (nome mostrado nos custos) ----- */
   // O id precisa ser igual ao id do item no inventário/loja.
-  const MATERIAIS = {
-    'madeira':        { nome: 'Madeira',        tipo: 'material', icone: 'hero' },
-    'pedra':          { nome: 'Pedra',          tipo: 'material', icone: 'hero' },
-    // 'barra-de-ferro': { nome: 'Barra de Ferro', tipo: 'material', icone: 'hero' },  // reative quando usar
-    'maca':           { nome: 'Maçã',           tipo: 'comida',   icone: 'hero' },
-    'banana':         { nome: 'Banana',         tipo: 'comida',   icone: 'hero' },
-  };
+  const MATERIAIS = [
+    'madeira',
+    'pedra',
+    'maca',
+    'banana'
+  ];
 
   /* ##########################################################
      ##   RECEITAS DE CADA CONSTRUÇÃO  <<<  ALTERE AQUI  >>>  ##
@@ -55,17 +47,10 @@
      ##   O custo da bigorna fica no bloco acima.             ##
      ########################################################## */
   const RECEITAS = {
-    bigorna: [ // armas, armaduras e acessórios
-      { id: 'espada-ferro-forja',    nome: 'Espada de Ferro',    tipo: 'arma',      icone: 'sword',    equipSlot: 'arma',     bonus: { AT: 8, CC: 2.5 },  custo: CUSTOS_RECEITAS_BIGORNA['espada-ferro-forja'] },
-      { id: 'capacete-ferro-forja',  nome: 'Capacete de Ferro',  tipo: 'armadura',  icone: 'helmet',   equipSlot: 'capacete', bonus: { FD: 3, MD: 1 },    custo: CUSTOS_RECEITAS_BIGORNA['capacete-ferro-forja'] },
-      { id: 'peitoral-ferro-forja',  nome: 'Peitoral de Ferro',  tipo: 'armadura',  icone: 'chest',    equipSlot: 'peitoral', bonus: { FD: 6, MD: 2 },    custo: CUSTOS_RECEITAS_BIGORNA['peitoral-ferro-forja'] },
-      { id: 'botas-ferro-forja',     nome: 'Botas de Ferro',     tipo: 'armadura',  icone: 'boots',    equipSlot: 'bota',     bonus: { FD: 2, AG: 1 },    custo: CUSTOS_RECEITAS_BIGORNA['botas-ferro-forja'] },
-      { id: 'anel-ferro-forja',      nome: 'Anel de Ferro',      tipo: 'acessorio', icone: 'ring',     equipSlot: 'anel',     bonus: { FD: 1, HP: 5 },    custo: CUSTOS_RECEITAS_BIGORNA['anel-ferro-forja'] },
-      { id: 'colar-ferro-forja',     nome: 'Colar de Ferro',     tipo: 'acessorio', icone: 'necklace', equipSlot: 'colar',    bonus: { MD: 2, HP: 10 },   custo: CUSTOS_RECEITAS_BIGORNA['colar-ferro-forja'] },
-    ],
+    bigorna: [],
     bancada: [ // itens em geral
-      { id: 'pocao-vida-basica', nome: 'Poção de Vida Básica', tipo: 'pocao', icone: 'hero', equipSlot: null, bonus: {}, custo: [{ id: 'maca', qtd: 2 },   { id: 'pedra', qtd: 1 }] },
-      { id: 'pocao-mana-basica', nome: 'Poção de Mana Básica', tipo: 'pocao', icone: 'hero', equipSlot: null, bonus: {}, custo: [{ id: 'banana', qtd: 2 }, { id: 'pedra', qtd: 1 }] },
+      { id: 'pocao-vida-basica-1', nome: 'Poção de Vida Básica', tipo: 'pocao', icone: 'hero', equipSlot: null, bonus: {}, custo: [{ id: 'maca', qtd: 2 },   { id: 'pedra', qtd: 1 }] },
+      { id: 'pocao-mana-basica-1', nome: 'Poção de Mana Básica', tipo: 'pocao', icone: 'hero', equipSlot: null, bonus: {}, custo: [{ id: 'banana', qtd: 2 }, { id: 'pedra', qtd: 1 }] },
     ],
   };
 
@@ -85,7 +70,10 @@
   const UNIT = { CC: '%', CA: '%' };
   const construidas = { cabana: false, bigorna: false, bancada: false };
   const fmt = n => n.toLocaleString('pt-BR', { maximumFractionDigits: 1 });
-  const nomeMaterial = id => (MATERIAIS[id] ? MATERIAIS[id].nome : id);
+  const nomeMaterial = id => {
+    const item = inv().obterItemCatalogo(id);
+    return item ? item.name : id;
+  };
 
   /* ===== Ícones das construções (pixel art) ===== */
   const ICONES = {
@@ -179,7 +167,9 @@
     return pagos;
   }
   function devolver(pagos) {
-    pagos.forEach(p => inv().adicionarItem({ ...p.item, quantity: p.qtd }));
+    pagos.forEach(p => {
+        inv().adicionarItemPorId(p.item.id, p.qtd);
+    });
   }
 
   /* ===== Criação da interface ===== */
@@ -234,7 +224,7 @@
   }
   function resumoMateriais() {
     return '<strong>Seus materiais:</strong> ' +
-      Object.keys(MATERIAIS).map(id => `${nomeMaterial(id)} x${contar(id)}`).join(' &nbsp;|&nbsp; ');
+      MATERIAIS.map(id => `${nomeMaterial(id)} x${contar(id)}`).join(' &nbsp;|&nbsp; ');
   }
   function cartao(titulo, desc, extra, botao, icone) {
     const ic = icone ? `<div class="base-icone">${pixelSVG(icone)}</div>` : '';
@@ -282,19 +272,24 @@
   }
 
   function fabricar(chave, receita) {
-    if (!temCusto(receita.custo)) return mensagem(chave, 'Materiais insuficientes.', false);
-    const pagos = pagar(receita.custo);
-    if (!pagos) return mensagem(chave, 'Não foi possível gastar os materiais.', false);
-
-    const novo = {
-      id: receita.id, name: receita.nome, type: receita.tipo, icon: receita.icone,
-      imagem: receita.imagem || null, equipSlot: receita.equipSlot, bonus: { ...receita.bonus },
-    };
-    if (!inv().adicionarItem(novo)) {          // sem espaço: devolve os materiais
-      devolver(pagos);
-      renderizar(chave);
-      return mensagem(chave, 'Inventário cheio! Libere um espaço.', false);
+    if (!temCusto(receita.custo)) {
+        return mensagem(chave, 'Materiais insuficientes.', false);
     }
+
+    const pagos = pagar(receita.custo);
+
+    if (!pagos) {
+        return mensagem(chave, 'Não foi possível gastar os materiais.', false);
+    }
+
+    const adicionado = inv().adicionarItemPorId(receita.id);
+
+    if (!adicionado) {
+        devolver(pagos);
+        renderizar(chave);
+        return mensagem(chave, 'Inventário cheio! Libere um espaço.', false);
+    }
+
     renderizar(chave);
     mensagem(chave, receita.nome + ' criado e enviado ao inventário!', true);
   }
@@ -317,9 +312,12 @@
     construida: chave => !!construidas[chave],
     // Para testes (ex.: no console): base.darMaterial('madeira', 10)
     darMaterial: (id, qtd = 1) => {
-      const m = MATERIAIS[id]; if (!m) return false;
-      const ok = inv().adicionarItem({ id, name: m.nome, type: m.tipo, icon: m.icone, imagem: null, equipSlot: null, bonus: {}, quantity: qtd });
-      renderizarVisivel(); return ok;
+      if (!MATERIAIS.includes(id)) return false;
+
+      const ok = inv().adicionarItemPorId(id, qtd);
+
+      renderizarVisivel();
+      return ok;
     },
   };
 })();

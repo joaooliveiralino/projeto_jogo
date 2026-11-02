@@ -106,3 +106,71 @@
   #inv-overlay .ui{flex-direction:column;overflow:auto}
   #inv-overlay{align-items:flex-start}
 }
+
+#inv-overlay .modal-descarte {
+    position: absolute;
+    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: min(360px, 90%);
+    padding: 22px;
+
+    background:
+        repeating-linear-gradient(90deg, rgba(0,0,0,.07) 0 2px, transparent 2px 9px),
+        radial-gradient(ellipse at center, var(--b3) 0%, var(--b2) 62%, var(--b1) 100%);
+
+    border: 4px solid var(--b0);
+    box-shadow:
+        inset 0 0 0 3px var(--b4),
+        inset 0 0 0 6px var(--b0),
+        6px 6px 0 rgba(0,0,0,.5);
+
+    text-align: center;
+}
+
+#inv-overlay .modal-descarte h3 {
+    margin: 0 0 18px;
+    color: var(--b5);
+    font-size: 1.1em;
+    font-weight: normal;
+}
+
+#inv-overlay .modal-descarte p {
+    line-height: 1.8;
+}
+
+#inv-overlay .modal-descarte input {
+    width: 80px;
+    padding: 8px;
+    margin: 10px;
+    background: var(--b1);
+    color: var(--txt);
+    border: 3px solid var(--b0);
+    font: inherit;
+    text-align: center;
+}
+
+#inv-overlay .botoes-descarte {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#inv-overlay .botoes-descarte button {
+    padding: 10px;
+    background: var(--b1);
+    color: var(--txt);
+    border: 3px solid var(--b0);
+    box-shadow: inset 0 0 0 2px var(--b4);
+    font: inherit;
+    font-size: .8em;
+    cursor: pointer;
+}
+
+#inv-overlay .botoes-descarte button:hover {
+    background: var(--b4);
+    color: white;
+}
