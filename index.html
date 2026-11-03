@@ -21,7 +21,7 @@
             <p>Este é seu acampamento. Se prepare para o que vem a seguir.</p>
 
             <nav id="opcoes-acampamento">
-                <button>Descançar</button>
+                <button id="botao-descansar">Descansar</button>
                 <button id="botao-inventario">Inventario</button>
                 <button id="botao-construir">Criar/Construir</button>
                 <button id="botao-explorar">Explorar/Viajar</button>
@@ -88,7 +88,7 @@
     <button id="botao-voltar-floresta">Voltar aos Campos Selvagens</button>
 
     <div id="aviso-proxima-camada" style="display: none;">
-        <p>Você derrotou 5 inimigos! A próxima camada foi desbloqueada.</p>
+        <p>Você derrotou 20 inimigos! A próxima camada foi desbloqueada.</p>
         
         <button id="botao-avancar-camada">Avançar para a próxima camada</button>
     </div>
@@ -158,7 +158,7 @@
     <h1>Campos Selvagens</h1>
 
     <p>Uma região perigosa, repleta de criaturas e recursos para explorar.</p>
-    <p id="progresso-camada">Camada 1 — Inimigos derrotados: 0/5</p>
+    <p id="progresso-camada">Camada 1 — Inimigos derrotados: 0/20</p>
     <div id="selecao-camadas">
         <h2>Camadas da floresta</h2>
         <div id="lista-camadas"></div>
@@ -218,6 +218,7 @@
 
 <script src="js/inventory.js"></script>
 <script src="js/script.js"></script>
+<script src="js/save.js"></script>
 <script src="js/base.js"></script>
 <script src="js/combat.js"></script>
 </body>
