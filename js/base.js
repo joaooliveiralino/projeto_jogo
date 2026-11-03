@@ -46,13 +46,486 @@
      ##   necklace (ou use "imagem" com o caminho do .webp)   ##
      ##   O custo da bigorna fica no bloco acima.             ##
      ########################################################## */
-  const RECEITAS = {
-    bigorna: [],
-    bancada: [ // itens em geral
-      { id: 'pocao-vida-basica-1', nome: 'Poção de Vida Básica', tipo: 'pocao', icone: 'hero', equipSlot: null, bonus: {}, custo: [{ id: 'maca', qtd: 2 },   { id: 'pedra', qtd: 1 }] },
-      { id: 'pocao-mana-basica-1', nome: 'Poção de Mana Básica', tipo: 'pocao', icone: 'hero', equipSlot: null, bonus: {}, custo: [{ id: 'banana', qtd: 2 }, { id: 'pedra', qtd: 1 }] },
+    //id: 'ID_DO_ITEM',
+    //nome: 'Nome do Item',
+    //custo: [
+    //    { id: 'ID_DO_MATERIAL', qtd: 2 },
+    //    { id: 'OUTRO_MATERIAL', qtd: 3 }
+    //]
+
+    const RECEITAS = {
+    bigorna: {
+        armas: [
+          {
+            id: 'espada-restaurada-1',
+            nome: 'Espada Restaurada',
+            custo: [
+              { id: 'espada-quebrada-1', qtd: 1 },
+              { id: 'pedra', qtd: 10},
+              { id: 'gosma', qtd: 5}
+            ]
+          },
+          {
+            id: 'adaga-presa-serpente-1',
+            nome: 'Adaga da Presa de Serpente',
+            custo: [
+              { id: 'presa-serpente', qtd: 10 },
+              { id: 'escama-serpente', qtd: 5 },
+            ]
+          },
+          {
+            id: 'espada-floresta-viva-1',
+            nome: 'Espada da Floresta Viva',
+            custo: [
+              { id: 'madeira-viva', qtd: 15 },
+              { id: 'folha-viva', qtd: 10},
+            ]
+          },
+          {
+            id: 'adaga-presa-lobo-1',
+            nome: 'Adaga de Presas de Lobo',
+            custo: [
+              { id: 'presa-lobo', qtd: 15 },
+              { id: 'couro-lobo', qtd: 10},
+            ]
+          },
+          {
+            id: 'foice-congelada-eternamente-1',
+            nome: 'Foice Eternamente Congelada',
+            custo: [
+              { id: 'cabo-foice-congelada', qtd: 1 },
+              { id: 'pedaco-gelo-eterno', qtd: 10},
+              { id: 'fragmento-gelo-compactado', qtd: 10}
+            ]
+          },
+          {
+            id: 'espada-congelada-1',
+            nome: 'Espada Congelada',
+            custo: [
+              { id: 'pedaco-gelo-eterno', qtd: 20 },
+              { id: 'neve-magica', qtd: 5},
+              { id: 'fragmento-gelo-compactado', qtd: 10}
+            ]
+          },
+          {
+            id: 'adaga-faminta-1',
+            nome: 'Adaga Faminta',
+            custo: [
+              { id: 'presas-nevasca', qtd: 4 },
+              { id: 'pele-congelada', qtd: 6},
+            ]
+          },
+          {
+            id: 'espada-grama-1',
+            nome: 'Espada de Grama',
+            custo: [
+              { id: 'elemento-grama', qtd: 5 },
+              { id: 'gema-jardim', qtd: 6 },
+              { id: 'lasca-fundador', qtd: 6 }
+            ]
+          },
+          {
+            id: 'espada-gelo-1',
+            nome: 'Espada de Gelo',
+            custo: [
+              { id: 'cabo-foice-congelada', qtd: 1 },
+              { id: 'elemento-gelo', qtd: 5},
+              { id: 'presas-nevasca', qtd: 6},
+              { id: 'fragmento-gelo-eterno', qtd: 6}
+            ]
+          },
+          {
+            id: 'espada-abissal-1',
+            nome: 'Espada Abissal',
+            custo: [
+              { id: 'gosma', qtd: 25 },
+              { id: 'presa-serpente', qtd: 20},
+              { id: 'esfera-magica', qtd: 20 },
+              { id: 'madeira-viva', qtd: 18 },
+              { id: 'folha-viva', qtd: 18 },
+              { id: 'gema-jardim', qtd: 10 },
+              { id: 'lasca-fundador', qtd: 10 },
+              { id: 'presa-lobo', qtd: 25 },
+              { id: 'cabo-foice-congelada', qtd: 5 },
+              { id: 'pedaco-gelo-eterno', qtd: 18 },
+              { id: 'presas-nevasca', qtd: 10 },
+              { id: 'pele-congelada', qtd: 10 },
+              { id: 'fragmento-gelo-compactado', qtd: 18 },
+              { id: 'espada-restaurada-1', qtd: 1 },
+            ]
+          },
+          {
+            id: 'espada-elemental-1',
+            nome: 'Espada Elemental',
+            custo: [
+              { id: 'espada-abissal-1', qtd: 1 },
+              { id: 'espada-grama-1', qtd: 1},
+              { id: 'espada-gelo-1', qtd: 1},
+              { id: 'elemento-gelo', qtd: 5},
+              { id: 'elemento-grama', qtd: 5},
+            ]
+          },
+
+          {
+            id: 'cajado-restaurado-1',
+            nome: 'Cajado Restaurado',
+            custo: [
+              { id: 'cajado-quebrado-1', qtd: 1 },
+              { id: 'pedra', qtd: 5 },
+              { id: 'gosma', qtd: 12 }
+            ]
+          },
+          {
+            id: 'cajado-ventos-1',
+            nome: 'Cajado dos Ventos',
+            custo: [
+              { id: 'esfera-magica', qtd: 10 },
+              { id: 'madeira-viva', qtd: 6 },
+              { id: 'folha-viva', qtd: 3 }
+            ]
+          },
+          {
+            id: 'cajado-vivo-1',
+            nome: 'Cajado Vivo',
+            custo: [
+              { id: 'madeira-viva', qtd: 15 },
+              { id: 'folha-viva', qtd: 12 },
+              { id: 'esfera-magica', qtd: 2 }
+            ]
+          },
+          {
+            id: 'cajado-jardim-1',
+            nome: 'Cajado do Jardim',
+            custo: [
+              { id: 'gema-jardim', qtd: 6 },
+              { id: 'lasca-fundador', qtd: 6 },
+              { id: 'esfera-magica', qtd: 18 }
+            ]
+          },
+          {
+            id: 'cajado-invernal-1',
+            nome: 'Cajado Invernal',
+            custo: [
+              { id: 'pedaco-gelo-compactado', qtd: 6 },
+              { id: 'cabo-foice-congelada', qtd: 1 },
+              { id: 'neve-magica', qtd: 12 }
+            ]
+          },
+          {
+            id: 'cajado-grama-1',
+            nome: 'Cajado de Grama',
+            custo: [
+              { id: 'elemento-grama', qtd: 5 },
+              { id: 'lasca-fundador', qtd: 12 },
+              { id: 'gema-jardim', qtd: 12 }
+            ]
+          },
+          {
+            id: 'cajado-gelo-1',
+            nome: 'Cajado de Gelo',
+            custo: [
+              { id: 'elemento-gelo', qtd: 5 },
+              { id: 'cabo-foice-congelada', qtd: 1 },
+              { id: 'pedaco-gelo-eterno', qtd: 12 },
+              { id: 'fragmento-gelo-compactado', qtd: 10}
+            ]
+          },
+          {
+            id: 'cajado-abissal-1',
+            nome: 'Cajado Abissal',
+            custo: [
+              { id: 'gosma', qtd: 25 },
+              { id: 'presa-serpente', qtd: 20},
+              { id: 'esfera-magica', qtd: 20 },
+              { id: 'madeira-viva', qtd: 18 },
+              { id: 'folha-viva', qtd: 18 },
+              { id: 'gema-jardim', qtd: 10 },
+              { id: 'lasca-fundador', qtd: 10 },
+              { id: 'presa-lobo', qtd: 25 },
+              { id: 'cabo-foice-congelada', qtd: 5 },
+              { id: 'pedaco-gelo-eterno', qtd: 18 },
+              { id: 'presas-nevasca', qtd: 10 },
+              { id: 'pele-congelada', qtd: 10 },
+              { id: 'fragmento-gelo-compactado', qtd: 18 },
+              { id: 'cajado-restaurado-1', qtd: 1 },
+            ]
+          },
+          {
+            id: 'espada-elemental-1',
+            nome: 'Espada Elemental',
+            custo: [
+              { id: 'cajado-abissal-1', qtd: 1 },
+              { id: 'cajado-grama-1', qtd: 1},
+              { id: 'cajado-gelo-1', qtd: 1},
+              { id: 'elemento-gelo', qtd: 5},
+              { id: 'elemento-grama', qtd: 5},
+            ]
+          },
+        ],
+        armaduras: [
+          {
+            nome: 'Armadura de Ferro',
+            resultado: [
+              { id: 'capacete-ferro-1', qtd: 1 },
+              { id: 'peitoral-ferro-1', qtd: 1 },
+              { id: 'botas-ferro-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'pedra', qtd: 50 },
+              { id: 'madeira', qtd: 50 },
+              { id: 'gosma', qtd: 35}
+            ]
+          },
+          {
+            nome: 'Armadura de Couro de Javali',
+            resultado: [
+              { id: 'capacete-couro-javali-1', qtd: 1 },
+              { id: 'peitoral-couro-javali-1', qtd: 1 },
+              { id: 'botas-couro-javali-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'couro-javali', qtd: 75 },
+              { id: 'gosma', qtd: 35 }
+            ]
+          },
+          {
+            nome: 'Armadura de Escama de Serpente',
+            resultado: [
+              { id: 'capacete-escama-serpente-1', qtd: 1 },
+              { id: 'peitoral-escama-serpente-1', qtd: 1 },
+              { id: 'botas-escama-serpente-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'escama-serpente', qtd: 75 },
+              { id: 'gosma', qtd: 35 }
+            ]
+          },
+          {
+            nome: 'Armadura de Madeira Viva',
+            resultado: [
+              { id: 'capacete-madeira-viva-1', qtd: 1 },
+              { id: 'peitoral-madeira-viva-1', qtd: 1 },
+              { id: 'botas-madeira-viva-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'madeira-viva', qtd: 75 },
+              { id: 'gosma', qtd: 35 }
+            ]
+          },
+          {
+            nome: 'Armadura Fundadora',
+            resultado: [
+              { id: 'capacete-fundador-1', qtd: 1 },
+              { id: 'peitoral-fundador-1', qtd: 1 },
+              { id: 'botas-fundador-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'lasca-fundador', qtd: 35 },
+              { id: 'gema-jardim', qtd: 5 },
+              { id: 'gosma', qtd: 15}
+            ]
+          },
+          {
+            nome: 'Armadura de Couro de Lobo',
+            resultado: [
+              { id: 'capacete-couro-lobo-1', qtd: 1 },
+              { id: 'peitoral-couro-lobo-1', qtd: 1 },
+              { id: 'botas-couro-lobo-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'couro-lobo', qtd: 75 },
+              { id: 'gosma', qtd: 35 }
+            ]
+          },
+          {
+            nome: 'Armadura de presas nevadas',
+            resultado: [
+              { id: 'capacete-presas-nevadas-1', qtd: 1 },
+              { id: 'peitoral-presas-nevadas-1', qtd: 1 },
+              { id: 'botas-presas-nevadas-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'presas-nevasca', qtd: 75 },
+              { id: 'gosma', qtd: 35 },
+              { id: 'pele-congelada', qtd: 35}
+            ]
+          },
+          {
+            nome: 'Armadura de Grama',
+            resultado: [
+              { id: 'capacete-grama-1', qtd: 1 },
+              { id: 'peitoral-grama-1', qtd: 1 },
+              { id: 'botas-grama-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'elemento-grama', qtd: 35 },
+              { id: 'gema-jardim', qtd: 5 }
+            ]
+          },
+          {
+            nome: 'Armadura de Gelo',
+            resultado: [
+              { id: 'capacete-gelo-1', qtd: 1 },
+              { id: 'peitoral-gelo-1', qtd: 1 },
+              { id: 'botas-gelo-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'elemento-gelo', qtd: 35 },
+              { id: 'pele-congelada', qtd: 5 }
+            ]
+          },
+          {
+            nome: 'Armadura Ancestral',
+            resultado: [
+              { id: 'capacete-ancestral', qtd: 1 },
+              { id: 'peitoral-ancestral', qtd: 1 },
+              { id: 'botas-ancestral', qtd: 1 }
+            ],
+            custo: [
+              { id: 'elemento-grama', qtd: 50 },
+              { id: 'elemento-gelo', qtd: 50 },
+              { id: 'lasca-fundador', qtd: 25},
+              { id: 'pele-congelada', qtd: 25}
+            ]
+          },
+        ],
+        acessorios: [
+          {
+            nome: 'Conjunto Pesado',
+            resultado: [
+              { id: 'colar-pesado-1', qtd: 1 },
+              { id: 'anel-pesado-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'couro-javali', qtd: 15 },
+              { id: 'escama-serpente', qtd: 15 }
+            ]
+          },
+          {
+            nome: 'Conjunto Rápido',
+            resultado: [
+              { id: 'colar-rapido-1', qtd: 1 },
+              { id: 'anel-rapido-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'presa-serpente', qtd: 15 },
+              { id: 'folha-viva', qtd: 15 }
+            ]
+          },
+          {
+            nome: 'Conjunto Fisico',
+            resultado: [
+              { id: 'colar-fisico-1', qtd: 1 },
+              { id: 'anel-fisico-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'presa-lobo', qtd: 15 },
+              { id: 'presa-serpente', qtd: 15 }
+            ]
+          },
+          {
+            nome: 'Conjunto Magico',
+            resultado: [
+              { id: 'colar-magico-1', qtd: 1 },
+              { id: 'anel-magico-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'esfera-magica', qtd: 15 },
+              { id: 'neve-magica', qtd: 15 }
+            ]
+          },
+          {
+            nome: 'Conjunto Perigoso',
+            resultado: [
+              { id: 'colar-perigoso-1', qtd: 1 },
+              { id: 'anel-perigoso-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'madeira-viva', qtd: 15 },
+              { id: 'pedaco-gelo-eterno', qtd: 15 }
+            ]
+          },
+          {
+            nome: 'Conjunto Critico',
+            resultado: [
+              { id: 'colar-critico-1', qtd: 1 },
+              { id: 'anel-critico-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'fragmento-gelo-compactado', qtd: 15 },
+              { id: 'presa-serpente', qtd: 15 }
+            ]
+          },
+          {
+            nome: 'Conjunto Assasino',
+            resultado: [
+              { id: 'colar-assasino-1', qtd: 1 },
+              { id: 'anel-assasino-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'esfera-magica', qtd: 15 },
+              { id: 'pedaco-gelo-eterno', qtd: 15 }
+            ]
+          },
+          {
+            nome: 'Conjunto Golem',
+            resultado: [
+              { id: 'colar-golem-1', qtd: 1 },
+              { id: 'anel-golem-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'madeira-viva', qtd: 15 },
+              { id: 'lasca-fundador', qtd: 5 }
+            ]
+          },
+          {
+            nome: 'Conjunto Suporte',
+            resultado: [
+              { id: 'colar-suporte-1', qtd: 1 },
+              { id: 'anel-suporte-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'esfera-magica', qtd: 15 },
+              { id: 'pele-congelada', qtd: 5 }
+            ]
+          },
+          {
+            nome: 'Conjunto Abençoado',
+            resultado: [
+              { id: 'colar-abencoado-1', qtd: 1 },
+              { id: 'anel-abencoado-1', qtd: 1 }
+            ],
+            custo: [
+              { id: 'elemento-grama', qtd: 2 },
+              { id: 'elemento-gelo', qtd: 2 }
+            ]
+          },
+        ]
+    },
+
+    bancada: {
+    pocoes: [
+        {
+            id: 'pocao-vida-basica-1',
+            nome: 'Poção de Vida Básica',
+            custo: [
+                { id: 'maca', qtd: 4 },
+                { id: 'banana', qtd: 2 }
+            ]
+        },
+        {
+            id: 'pocao-mana-basica-1',
+            nome: 'Poção de mana Básica',
+            custo: [
+                { id: 'banana', qtd: 4 },
+                { id: 'maca', qtd: 2 }
+            ]
+        },
     ],
-  };
+    comidas: [],
+    outros: []
+}
+};
 
   /* ----- Descrição das construções (ordem em que aparecem) ----- */
   const CONSTRUCOES = {
@@ -249,9 +722,27 @@
         return cartao(c.nome, c.desc, custo, botao, c.icone);
       }).join('');
     } else {
-      lista.innerHTML = RECEITAS[chave].map((r, i) =>
-        cartao(r.nome, '', htmlBuffs(r.bonus) + `<div class="base-custos">${htmlCusto(r.custo)}</div>`,
-          `<button type="button" data-criar="${i}">Criar</button>`)).join('');
+      const categorias = RECEITAS[chave];
+
+      lista.innerHTML = Object.entries(categorias).map(([categoria, receitas]) => {
+        if (receitas.length === 0) return '';
+
+        const titulo = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+
+        return `
+          <div class="base-categoria">
+            <h2>${titulo}</h2>
+            ${receitas.map((r, i) =>
+              cartao(
+                r.nome,
+                '',
+                htmlBuffs(r.bonus) + `<div class="base-custos">${htmlCusto(r.custo)}</div>`,
+                `<button type="button" data-categoria="${categoria}" data-criar="${i}">Criar</button>`
+              )
+            ).join('')}
+          </div>
+        `;
+      }).join('');
     }
   }
   function renderizarVisivel() {
@@ -276,23 +767,47 @@
         return mensagem(chave, 'Materiais insuficientes.', false);
     }
 
+    // Permite fabricar um item ou vários itens.
+    const resultados = receita.resultado || [
+        { id: receita.id, qtd: 1 }
+    ];
+
+    if (!resultados.length || resultados.some(r => !r.id || r.qtd < 1)) {
+        return mensagem(chave, 'Receita com resultado inválido.', false);
+    }
+
     const pagos = pagar(receita.custo);
 
     if (!pagos) {
         return mensagem(chave, 'Não foi possível gastar os materiais.', false);
     }
 
-    const adicionado = inv().adicionarItemPorId(receita.id);
+    const adicionados = [];
 
-    if (!adicionado) {
-        devolver(pagos);
-        renderizar(chave);
-        return mensagem(chave, 'Inventário cheio! Libere um espaço.', false);
+    // Entrega cada item da receita.
+    for (const item of resultados) {
+        const qtd = item.qtd || 1;
+        const adicionado = inv().adicionarItemPorId(item.id, qtd);
+
+        if (!adicionado) {
+            // Remove os itens que já foram entregues.
+            adicionados.forEach(r => {
+                inv().removerItem(r.id, r.qtd);
+            });
+
+            // Devolve os materiais gastos.
+            devolver(pagos);
+
+            renderizar(chave);
+            return mensagem(chave, 'Inventário cheio! Libere espaço.', false);
+        }
+
+        adicionados.push({ id: item.id, qtd });
     }
 
     renderizar(chave);
     mensagem(chave, receita.nome + ' criado e enviado ao inventário!', true);
-  }
+}
 
   /* ===== Eventos ===== */
   principal.addEventListener('click', e => {
@@ -302,7 +817,13 @@
     else if (b.dataset.criar !== undefined) {
       const tela = b.closest('.base-tela');
       const chave = Object.keys(telas).find(k => telas[k] === tela);
-      fabricar(chave, RECEITAS[chave][+b.dataset.criar]);
+
+      const categoria = b.dataset.categoria;
+      const indice = Number(b.dataset.criar);
+
+      const receita = RECEITAS[chave][categoria][indice];
+
+      fabricar(chave, receita);
     }
   });
   document.getElementById('botao-construir').addEventListener('click', () => mostrar('base'));
@@ -312,12 +833,30 @@
     construida: chave => !!construidas[chave],
     // Para testes (ex.: no console): base.darMaterial('madeira', 10)
     darMaterial: (id, qtd = 1) => {
-      if (!MATERIAIS.includes(id)) return false;
+    if (!inv().obterItemCatalogo(id)) return false;
 
-      const ok = inv().adicionarItemPorId(id, qtd);
+    const ok = inv().adicionarItemPorId(id, qtd);
 
-      renderizarVisivel();
-      return ok;
-    },
+    renderizarVisivel();
+    return ok;
+},
+  obterDadosSave: () => ({
+    construidas: { ...construidas }
+}),
+
+carregarDadosSave: dados => {
+    if (!dados || !dados.construidas) {
+        return false;
+    }
+
+    Object.keys(construidas).forEach(chave => {
+        if (typeof dados.construidas[chave] === "boolean") {
+            construidas[chave] = dados.construidas[chave];
+        }
+    });
+
+    renderizarVisivel();
+    return true;
+},
   };
 })();

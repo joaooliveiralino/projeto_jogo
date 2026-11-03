@@ -173,7 +173,7 @@
     mk('neve-magica', 'Neve Magica', 'material', null, {}),
     mk('fragmento-gelo-compactado', 'Fragemento de Gelo Compactado', 'material', null, {}),
     mk('elemento-gelo', 'Elemento de Gelo', 'material', null, {}),
-  ];
+    ];
 
   const BASE_STATS = {
     'Nível': 1, 'AT': 10, 'AP': 7, 'FD': 4, 'MD': 3, 'AG': 10, 'CC': 5, 'CA': 150,
@@ -235,7 +235,7 @@ function adicionarExperiencia(quantidade) {
     }
 
     renderStatus();
-
+    salvarAutomaticamente();
     return niveisGanhos;
 }
 
@@ -243,6 +243,7 @@ function aplicarPenalidadeMorte() {
     vitals.exp[0] = Math.floor(vitals.exp[0] * 0.5);
 
     renderStatus();
+    salvarAutomaticamente();
 }
 
   const state = {
@@ -365,12 +366,20 @@ function carregarItensIniciais() {
     return t;
   }
 
+  function salvarAutomaticamente() {
+    if (typeof window.salvarProgresso === "function") {
+        window.salvarProgresso();
+    }
+  }
+
   /* ===== Operações (alteram os dados e depois a interface) ===== */
   function moveItem(src, dst) {
     if (sameLoc(src, dst) || !getItem(src) || !canSwap(src, dst)) return false;
     const a = getItem(src), b = getItem(dst);
     setItem(dst, a); setItem(src, b);      // troca segura: nunca duplica nem perde
-    render(); return true;
+    render(); 
+    salvarAutomaticamente();
+    return true;
   }
   function unequipItem(slotKey) {
     const free = state.inventory.indexOf(null);
@@ -397,6 +406,9 @@ function carregarItensIniciais() {
                 (pilhaExistente.quantity || 1) + quantidade;
 
             render();
+
+            salvarAutomaticamente();
+            
             return true;
         }
     }
@@ -457,6 +469,7 @@ function carregarItensIniciais() {
     }
 
     render();
+    salvarAutomaticamente();
     return true;
   }
   function selectItem(l) { state.selected = l; render(); }
@@ -772,6 +785,7 @@ atualizarVida: function(novaVida) {
     vitals.life[0] = novaVida - bonus;
 
     renderStatus();
+    salvarAutomaticamente();
 },
 
 atualizarMana: function(novaMana) {
@@ -780,6 +794,7 @@ atualizarMana: function(novaMana) {
     vitals.mana[0] = novaMana - bonus;
 
     renderStatus();
+    salvarAutomaticamente();
 },
 
 definirAtributosRespawn: function() {
@@ -798,6 +813,58 @@ obterTipoAtaque: function() {
     }
 
     return armaEquipada.tipoAtaque || "fisico";
+},
+
+obterDadosSave: function() {
+    return {
+        inventory: state.inventory,
+        equipment: state.equipment,
+
+        vitals: {
+            life: [...vitals.life],
+            mana: [...vitals.mana],
+            exp: [...vitals.exp]
+        },
+
+        nivel: nivel,
+        bonusNivel: { ...bonusNivel }
+    };
+},
+
+carregarDadosSave: function(dados) {
+    if (
+        !dados ||
+        !Array.isArray(dados.inventory) ||
+        !dados.equipment ||
+        !dados.vitals
+    ) {
+        return false;
+    }
+
+    state.inventory = Array.from(
+        { length: INV_SIZE },
+        (_, i) => dados.inventory[i] || null
+    );
+
+    state.equipment = Object.fromEntries(
+        EQ_SLOTS.map(slot => [
+            slot.key,
+            dados.equipment[slot.key] || null
+        ])
+    );
+
+    vitals.life = [...dados.vitals.life];
+    vitals.mana = [...dados.vitals.mana];
+    vitals.exp = [...dados.vitals.exp];
+
+    nivel = dados.nivel;
+    Object.assign(bonusNivel, dados.bonusNivel);
+
+    state.selected = null;
+
+    render();
+
+    return true;
 },
 
   };

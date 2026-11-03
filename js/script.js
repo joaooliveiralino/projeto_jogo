@@ -11,6 +11,48 @@ const progressoFloresta = {
     }
 };
 
+function obterDadosFlorestaSave() {
+    return {
+        camadaAtual: progressoFloresta.camadaAtual,
+        maiorCamadaDesbloqueada: progressoFloresta.maiorCamadaDesbloqueada,
+        derrotasPorCamada: { ...progressoFloresta.derrotasPorCamada }
+    };
+}
+
+function carregarDadosFlorestaSave(dados) {
+    if (
+        !dados ||
+        typeof dados.camadaAtual !== "number" ||
+        typeof dados.maiorCamadaDesbloqueada !== "number" ||
+        !dados.derrotasPorCamada
+    ) {
+        return false;
+    }
+
+    progressoFloresta.camadaAtual = dados.camadaAtual;
+    progressoFloresta.maiorCamadaDesbloqueada = dados.maiorCamadaDesbloqueada;
+
+    progressoFloresta.derrotasPorCamada = {
+        ...dados.derrotasPorCamada
+    };
+
+    atualizarProgressoFloresta();
+    atualizarSelecaoCamadas();
+
+    const aviso = document.querySelector("#aviso-proxima-camada");
+
+    if (
+        progressoFloresta.derrotasPorCamada[progressoFloresta.camadaAtual] >= inimigosNecessariosPorCamada &&
+        progressoFloresta.camadaAtual < 5
+    ) {
+        aviso.style.display = "block";
+    } else {
+        aviso.style.display = "none";
+    }
+
+    return true;
+}
+
 function registrarDerrotaInimigo() {
     const camada = progressoFloresta.camadaAtual;
     const derrotas = progressoFloresta.derrotasPorCamada[camada];
@@ -27,6 +69,7 @@ function registrarDerrotaInimigo() {
     }
 
     atualizarProgressoFloresta();
+    window.salvarProgresso();
 
     console.log(
         `Camada ${camada}: ${progressoFloresta.derrotasPorCamada[camada]}/${inimigosNecessariosPorCamada} inimigos derrotados`
@@ -56,6 +99,7 @@ function atualizarSelecaoCamadas() {
 
             atualizarProgressoFloresta();
             atualizarSelecaoCamadas();
+            window.salvarProgresso();
         });
 
         if (camada === progressoFloresta.camadaAtual) {
@@ -94,6 +138,8 @@ function avancarCamada() {
     atualizarProgressoFloresta();
 
     atualizarSelecaoCamadas();
+
+    window.salvarProgresso();
 
     console.log(`Você avançou para a camada ${proximaCamada}!`);
 }
@@ -235,7 +281,24 @@ document.querySelector("#botao-voltar-floresta")
 
     //Sistema de moedas do jogador
 
-let moedasJogador = 10000000;
+let moedasJogador = 0;
+
+window.moedas = {
+    obter: function() {
+        return moedasJogador;
+    },
+
+    definir: function(valor) {
+        if (!Number.isFinite(valor) || valor < 0) {
+            return false;
+        }
+
+        moedasJogador = Math.floor(valor);
+        atualizarMoedas();
+
+        return true;
+    }
+};
 
 function atualizarMoedas() {
     document.querySelector("#moedas-mercador").textContent =
@@ -419,6 +482,30 @@ const produtosCacador = {
     drops: []
 };
 
+const precosDrops = {
+    "gosma": 5,
+    "pedra": 3,
+    "madeira": 3,
+    "presa-serpente": 10,
+    "escama-serpente": 12,
+    "couro-javali": 8,
+    "esfera-magica": 15,
+    "madeira-viva": 12,
+    "folha-viva": 8,
+    "gema-jardim": 20,
+    "lasca-fundador": 25,
+    "elemento-grama": 15,
+    "presa-lobo": 12,
+    "couro-lobo": 10,
+    "cabo-foice-congelada": 20,
+    "pedaco-gelo-eterno": 25,
+    "presas-nevasca": 20,
+    "pele-congelada": 15,
+    "neve-magica": 10,
+    "fragmento-gelo-compactado": 30,
+    "elemento-gelo": 20
+};
+
 function venderDrop(produto, quantidade) {
     const inventario = window.inventario;
 
@@ -446,6 +533,7 @@ function venderDrop(produto, quantidade) {
     moedasJogador += valorVenda;
 
     atualizarMoedas();
+    window.salvarProgresso();
 
     alert(
         `Você vendeu ${quantidade}x ${produto.nome} por ${valorVenda} moedas!`
@@ -462,12 +550,20 @@ function mostrarProdutosCacador(categoria) {
     if (categoria === "drops") {
     const itensInventario = window.inventario.obterItens();
 
-    const produtos = produtosCacador.drops.filter(function(produto) {
-        return itensInventario.some(function(itemInventario) {
-            return itemInventario &&
-                itemInventario.id === produto.idItem;
+    const produtos = itensInventario
+        .filter(function(item) {
+            return item &&
+                (item.type === "material" || item.type === "drop") &&
+                item.quantity > 0 &&
+                precosDrops[item.id] !== undefined;
+        })
+        .map(function(item) {
+            return {
+                idItem: item.id,
+                nome: item.name,
+                precoVenda: precosDrops[item.id]
+            };
         });
-    });
 
     if (produtos.length === 0) {
         const mensagem = document.createElement("p");
@@ -494,6 +590,7 @@ function mostrarProdutosCacador(categoria) {
         const quantidade = document.createElement("input");
         quantidade.type = "number";
         quantidade.min = "1";
+        quantidade.max = itemInventario.quantity;
         quantidade.step = "1";
         quantidade.value = "1";
         quantidade.setAttribute("aria-label", "Quantidade para vender");
@@ -510,7 +607,7 @@ function mostrarProdutosCacador(categoria) {
         botaoVenderTudo.textContent = "Vender tudo";
 
         botaoVenderTudo.addEventListener("click", function() {
-            venderDrop(produto, itemInventario.quantity || 1);
+            venderDrop(produto, itemInventario.quantity);
             mostrarProdutosCacador("drops");
         });
 
@@ -586,6 +683,7 @@ function comprarProduto(produto) {
     moedasJogador -= produto.preco;
 
     atualizarMoedas();
+    window.salvarProgresso();
 
     alert("Você comprou: " + produto.nome);
 }
@@ -602,3 +700,45 @@ function explorarFloresta() {
 
     iniciarCombate(inimigo);
 }
+
+let ultimoDescanso = 0;
+const TEMPO_ENTRE_DESCANSOS = 30 * 60 * 1000;
+
+function descansar() {
+    const agora = Date.now();
+    const tempoPassado = agora - ultimoDescanso;
+
+    if (tempoPassado < TEMPO_ENTRE_DESCANSOS) {
+        const tempoRestante = TEMPO_ENTRE_DESCANSOS - tempoPassado;
+        const minutos = Math.ceil(tempoRestante / 60000);
+
+        alert(`Você precisa esperar mais ${minutos} minutos para descansar novamente.`);
+        return;
+    }
+
+    const vida = window.inventario.obterVida();
+    const mana = window.inventario.obterMana();
+
+    const novaVida = Math.min(
+        vida.atual + Math.floor(vida.maxima * 0.5),
+        vida.maxima
+    );
+
+    const novaMana = Math.min(
+        mana.atual + Math.floor(mana.maxima * 0.5),
+        mana.maxima
+    );
+
+    window.inventario.atualizarVida(novaVida);
+    window.inventario.atualizarMana(novaMana);
+
+    ultimoDescanso = agora;
+
+    window.salvarProgresso();
+
+    alert("Você descansou e recuperou parte da sua vida e mana!");
+}
+
+document.getElementById("botao-descansar").addEventListener("click", function() {
+    descansar();
+});
