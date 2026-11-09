@@ -415,6 +415,138 @@ const inimigosPorCamada = {
         ]
 };
 
+const inimigoSecretoNevada = criarInimigo("Ice Fragment", 2, "magico", {
+        AT: 0,
+        AP: 0,
+        FD: 0,
+        MD: 0,
+        AG: 0,
+        CC: 0,
+        CA: 100
+    }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Fragmento_Gelo.png", 0.5, 2);
+
+const inimigosNevadaPorCamada = {
+    1: [
+        criarInimigo("Boneco de Neve", 100, "magico", {
+            AT: 0,
+            AP: 65,
+            FD: 20,
+            MD: 35,
+            AG: 15,
+            CC: 8,
+            CA: 150
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Boneco_neve_L.png", 50, 100),
+
+        criarInimigo("Ice Element", 85, "magico", {
+            AT: 0,
+            AP: 80,
+            FD: 15,
+            MD: 40,
+            AG: 25,
+            CC: 12,
+            CA: 150
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Ice_element.png", 50, 120)
+    ],
+
+    2: [
+        criarInimigo("Boneco de Neve", 100, "magico", {
+            AT: 0,
+            AP: 65,
+            FD: 20,
+            MD: 35,
+            AG: 15,
+            CC: 8,
+            CA: 150
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Boneco_neve_L.png", 30, 100),
+
+        criarInimigo("Dansher", 120, "fisico", {
+            AT: 70,
+            AP: 0,
+            FD: 35,
+            MD: 20,
+            AG: 35,
+            CC: 10,
+            CA: 150
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Dansher_L.png", 40, 130),
+
+        criarInimigo("Ice Element", 85, "magico", {
+            AT: 0,
+            AP: 80,
+            FD: 15,
+            MD: 40,
+            AG: 25,
+            CC: 12,
+            CA: 150
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Ice_element.png", 30, 120)
+    ],
+
+    3: [
+        criarInimigo("Dansher", 120, "fisico", {
+            AT: 70,
+            AP: 0,
+            FD: 35,
+            MD: 20,
+            AG: 35,
+            CC: 10,
+            CA: 150
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Dansher_L.png", 50, 130),
+
+        criarInimigo("Lobo das Neves", 140, "fisico", {
+            AT: 85,
+            AP: 0,
+            FD: 40,
+            MD: 25,
+            AG: 55,
+            CC: 15,
+            CA: 160
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Lobo_das_neves_L.png", 50, 160)
+    ],
+
+    4: [
+        criarInimigo("Lobo das Neves", 140, "fisico", {
+            AT: 85,
+            AP: 0,
+            FD: 40,
+            MD: 25,
+            AG: 55,
+            CC: 15,
+            CA: 160
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Lobo_das_neves_L.png", 40, 160),
+
+        criarInimigo("Rynter", 180, "fisico", {
+            AT: 110,
+            AP: 0,
+            FD: 55,
+            MD: 35,
+            AG: 40,
+            CC: 15,
+            CA: 160
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Rynter_L.png", 60, 220)
+    ],
+
+    5: [
+        criarInimigo("Rynter", 180, "fisico", {
+            AT: 110,
+            AP: 0,
+            FD: 55,
+            MD: 35,
+            AG: 40,
+            CC: 15,
+            CA: 160
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Rynter_L.png", 70, 220),
+
+        criarInimigo("Thrystan", 500, "fisico", {
+            AT: 160,
+            AP: 0,
+            FD: 85,
+            MD: 65,
+            AG: 65,
+            CC: 20,
+            CA: 200
+        }, "imagens/area-nevada/TODOS_INIMIGOS_GELO/Boss_gelo.png", 30, 1000)
+    ]
+};
+
 const dropsInimigos = {
     "Slime": [
         { id: "gosma", chance: 80 },
@@ -452,36 +584,109 @@ const dropsInimigos = {
     "OakGarden, The Nature Founder": [
         { id: "gema-jardim", chance: 100 },
         { id: "lasca-fundador", chance: 100 }
+    ],
+
+    "Boneco de Neve": [
+        { id: "neve-magica", chance: 50 }
+    ],
+
+    "Ice Element": [
+        { id: "fragmento-gelo-compactado", chance: 40 }
+    ],
+
+    "Dansher": [
+        { id: "pedaco-gelo-eterno", chance: 60 },
+    ],
+
+    "Lobo das Neves": [
+        { id: "couro-lobo", chance: 65 },
+        { id: "presa-lobo", chance: 40 }
+    ],
+
+    "Rynter": [
+        { id: "cabo-foice-congelada", chance: 60 },
+    ],
+
+    "Thrystan": [
+        { id: "presa-nevasca", chance: 100 },
+        { id: "pele-congelada", chance: 100 }
+    ],
+
+    "Ice Fragment": [
+        { id: "elemento-gelo", chance: 25 }
     ]
 };
 
 function validarChancesInimigos() {
-    for (const camada in inimigosPorCamada) {
-        const inimigos = inimigosPorCamada[camada];
+    const regioes = {
+        "Floresta": inimigosPorCamada,
+        "Nevada": inimigosNevadaPorCamada
+    };
 
-        const total = inimigos.reduce(function(soma, inimigo) {
-            return soma + inimigo.chance;
-        }, 0);
+    for (const regiao in regioes) {
+        const tabela = regioes[regiao];
 
-        if (total !== 100) {
-            console.error(
-                `Erro na camada ${camada}: a soma das chances é ${total}%, mas deveria ser 100%.`
-            );
+        for (const camada in tabela) {
+            const inimigos = tabela[camada];
 
-            return false;
+            const total = inimigos.reduce(function(soma, inimigo) {
+                return soma + inimigo.chance;
+            }, 0);
+
+            if (total !== 100) {
+                console.error(
+                    `Erro na ${regiao}, camada ${camada}: soma das chances = ${total}%. Deveria ser 100%.`
+                );
+
+                return false;
+            }
         }
     }
 
-    console.log("Todas as camadas possuem chances totalizando 100%.");
+    console.log("Todas as camadas da Floresta e Nevada possuem chances totalizando 100%.");
+
     return true;
 }
 
 validarChancesInimigos();
 
 function selecionarInimigo() {
-    const camada = progressoFloresta.camadaAtual;
+    function selecionarInimigo() {
+    if (regiaoAtual === "nevada" && Math.random() < 0.005) {
+        return criarInimigo(
+            inimigoSecretoNevada.nome,
+            inimigoSecretoNevada.vidaMaxima,
+            inimigoSecretoNevada.tipoAtaque,
+            inimigoSecretoNevada.atributos,
+            inimigoSecretoNevada.imagem,
+            inimigoSecretoNevada.chance,
+            inimigoSecretoNevada.experiencia
+        );
+    }
 
-    const inimigosDisponiveis = inimigosPorCamada[camada];
+    if (regiaoAtual === "floresta" && Math.random() < 0.005) {
+        return criarInimigo(
+            inimigoSecretoFloresta.nome,
+            inimigoSecretoFloresta.vidaMaxima,
+            inimigoSecretoFloresta.tipoAtaque,
+            inimigoSecretoFloresta.atributos,
+            inimigoSecretoFloresta.imagem,
+            inimigoSecretoFloresta.chance,
+            inimigoSecretoFloresta.experiencia
+        );
+    }
+
+}
+
+    const camada = regiaoAtual === "nevada"
+        ? progressoNevada.camadaAtual
+        : progressoFloresta.camadaAtual;
+
+    const tabelaInimigos = regiaoAtual === "nevada"
+        ? inimigosNevadaPorCamada
+        : inimigosPorCamada;
+
+    const inimigosDisponiveis = tabelaInimigos[camada];
 
     if (!inimigosDisponiveis || inimigosDisponiveis.length === 0) {
         console.error(`Não existem inimigos cadastrados na camada ${camada}.`);
@@ -569,11 +774,17 @@ function iniciarCombate(novoInimigo) {
 
     inimigo = novoInimigo;
 
+    const telaCombate = document.querySelector("#tela-combate");
+
+    telaCombate.classList.toggle("combate-nevada", regiaoAtual === "nevada");
+
     console.log(inimigo);
 
     jogador.atualizarAtributos();
 
     combateFinalizado = false;
+
+    botaoNovoCombate.disabled = true;
 
     limparLog();
 
@@ -610,6 +821,9 @@ async function executarTurnoInimigo() {
         respawnAcampamento();
 
         adicionarMensagem("Você foi derrotado!");
+
+        botaoNovoCombate.disabled = false;
+
         return;
     }
 
@@ -774,6 +988,7 @@ async function usarHabilidade(idHabilidade) {
 
     if (jogador.manaAtual < habilidade.custoMana) {
         adicionarMensagem("Mana insuficiente!");
+        executandoAcao = false;
         return;
     }
 
@@ -797,12 +1012,23 @@ async function usarHabilidade(idHabilidade) {
 
     if (inimigo.vidaAtual <= 0) {
         combateFinalizado = true;
-        registrarDerrotaInimigo();
+        if (regiaoAtual === "nevada") {
+            registrarDerrotaInimigoNevada();
+        } else {
+            registrarDerrotaInimigo();
+        }
+        if (regiaoAtual === "floresta" && inimigo.nome === "OakGarden, The Nature Founder") {
+            desbloquearAreaNevada();
+        }
+
         recompensarExperiencia();
         recompensarDrops();
         bloquearAcoesCombate();
 
         adicionarMensagem("Você derrotou o inimigo!");
+
+        botaoNovoCombate.disabled = false;
+
         return;
     }
 
@@ -855,13 +1081,24 @@ async function atacarComJogador() {
 
     if (inimigo.vidaAtual <= 0) {
         combateFinalizado = true;
-        registrarDerrotaInimigo();
+        if (regiaoAtual === "nevada") {
+            registrarDerrotaInimigoNevada();
+        } else {
+            registrarDerrotaInimigo();
+        }
+
+        if (regiaoAtual === "floresta" &&inimigo.nome === "OakGarden, The Nature Founder") {
+            desbloquearAreaNevada();
+        }
+
         recompensarExperiencia();
         recompensarDrops();
         bloquearAcoesCombate();
         botaoAtacar.disabled = true;
 
         adicionarMensagem("Você derrotou o inimigo!");
+
+        botaoNovoCombate.disabled = false;
 
         return;
     }

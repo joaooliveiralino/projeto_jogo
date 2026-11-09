@@ -17,7 +17,7 @@
 
 /* Tela de construções: mesmo fundo do acampamento */
 .base-fundo-base{
-  background-image:url("../Imagens/acampamentoteste.webp");
+  background-image: url("../Imagens/areas/areas-restantes/Acampamento1.jpg");
   background-position:center;image-rendering:auto;
 }
 

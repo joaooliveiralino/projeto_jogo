@@ -69,6 +69,7 @@ window.salvarProgresso = function() {
         inventario: window.inventario.obterDadosSave(),
         moedas: window.moedas.obter(),
         floresta: obterDadosFlorestaSave(),
+        nevada: obterDadosNevadaSave(), 
         ultimoDescanso: ultimoDescanso,
         base: window.base.obterDadosSave(),
     };
@@ -100,6 +101,10 @@ window.carregarProgresso = function() {
 
     if (dados.floresta) {
         carregarDadosFlorestaSave(dados.floresta);
+    }
+
+    if (dados.nevada) {
+        carregarDadosNevadaSave(dados.nevada);
     }
 
     if (typeof dados.ultimoDescanso === "number") {
