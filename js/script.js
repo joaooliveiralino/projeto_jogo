@@ -1,6 +1,28 @@
 //Funções de navegação
 
 const inimigosNecessariosPorCamada = 20;
+let areaNevadaDesbloqueada = false;
+const inimigosNecessariosPorCamadaNevada = 20;
+let regiaoAtual = "floresta";
+
+const progressoNevada = {
+    camadaAtual: 1,
+    maiorCamadaDesbloqueada: 1,
+
+    derrotasPorCamada: {
+        1: 0
+    }
+};
+
+function desbloquearAreaNevada() {
+    if (areaNevadaDesbloqueada) return;
+
+    areaNevadaDesbloqueada = true;
+    window.salvarProgresso();
+    atualizarProgressoFloresta();
+
+    console.log("Área Nevada desbloqueada!");
+}
 
 const progressoFloresta = {
     camadaAtual: 1,
@@ -15,7 +37,16 @@ function obterDadosFlorestaSave() {
     return {
         camadaAtual: progressoFloresta.camadaAtual,
         maiorCamadaDesbloqueada: progressoFloresta.maiorCamadaDesbloqueada,
-        derrotasPorCamada: { ...progressoFloresta.derrotasPorCamada }
+        derrotasPorCamada: { ...progressoFloresta.derrotasPorCamada },
+        areaNevadaDesbloqueada: areaNevadaDesbloqueada,
+    };
+}
+
+function obterDadosNevadaSave() {
+    return {
+        camadaAtual: progressoNevada.camadaAtual,
+        maiorCamadaDesbloqueada: progressoNevada.maiorCamadaDesbloqueada,
+        derrotasPorCamada: { ...progressoNevada.derrotasPorCamada }
     };
 }
 
@@ -31,10 +62,8 @@ function carregarDadosFlorestaSave(dados) {
 
     progressoFloresta.camadaAtual = dados.camadaAtual;
     progressoFloresta.maiorCamadaDesbloqueada = dados.maiorCamadaDesbloqueada;
-
-    progressoFloresta.derrotasPorCamada = {
-        ...dados.derrotasPorCamada
-    };
+    progressoFloresta.derrotasPorCamada = {...dados.derrotasPorCamada};
+    areaNevadaDesbloqueada = dados.areaNevadaDesbloqueada === true;
 
     atualizarProgressoFloresta();
     atualizarSelecaoCamadas();
@@ -51,6 +80,21 @@ function carregarDadosFlorestaSave(dados) {
     }
 
     return true;
+}
+
+function carregarDadosNevadaSave(dados) {
+    if (!dados) return;
+
+    progressoNevada.camadaAtual = dados.camadaAtual ?? 1;
+
+    progressoNevada.maiorCamadaDesbloqueada =
+        dados.maiorCamadaDesbloqueada ?? 1;
+
+    progressoNevada.derrotasPorCamada =
+        dados.derrotasPorCamada ?? { 1: 0 };
+
+    atualizarProgressoNevada();
+    atualizarSelecaoCamadasNevada();
 }
 
 function registrarDerrotaInimigo() {
@@ -76,12 +120,53 @@ function registrarDerrotaInimigo() {
     );
 }
 
+function registrarDerrotaInimigoNevada() {
+    const camada = progressoNevada.camadaAtual;
+
+    if (progressoNevada.derrotasPorCamada[camada] >= inimigosNecessariosPorCamadaNevada) {
+        return;
+    }
+
+    progressoNevada.derrotasPorCamada[camada]++;
+
+    if (
+        progressoNevada.derrotasPorCamada[camada] === inimigosNecessariosPorCamadaNevada &&
+        camada < 5
+    ) {
+        document.querySelector("#aviso-proxima-camada-nevada").style.display = "block";
+    }
+
+    atualizarProgressoNevada();
+    window.salvarProgresso();
+
+    console.log(
+        `Nevada — Camada ${camada}: ${progressoNevada.derrotasPorCamada[camada]}/${inimigosNecessariosPorCamadaNevada} inimigos derrotados`
+    );
+}
+
 function atualizarProgressoFloresta() {
     const camada = progressoFloresta.camadaAtual;
     const derrotas = progressoFloresta.derrotasPorCamada[camada];
 
     document.querySelector("#progresso-camada").textContent =
         `Camada ${camada} — Inimigos derrotados: ${derrotas}/${inimigosNecessariosPorCamada}`;
+
+    document.querySelector("#botao-nevada").style.display =
+        areaNevadaDesbloqueada ? "block" : "none";
+}
+
+function atualizarProgressoNevada() {
+    const camada = progressoNevada.camadaAtual;
+    const derrotas = progressoNevada.derrotasPorCamada[camada] ?? 0;
+
+document.querySelector("#progresso-nevada").textContent =`Camada ${camada} — Inimigos derrotados: ${derrotas}/${inimigosNecessariosPorCamadaNevada}`;
+    const camadaCompleta = derrotas >= inimigosNecessariosPorCamadaNevada;
+
+document.querySelector("#botao-avancar-camada-nevada").style.display =
+    camadaCompleta && camada < 5 ? "block" : "none";
+
+document.querySelector("#aviso-proxima-camada-nevada").style.display =
+    camadaCompleta && camada < 5 ? "block" : "none";
 }
 
 function atualizarSelecaoCamadas() {
@@ -103,6 +188,32 @@ function atualizarSelecaoCamadas() {
         });
 
         if (camada === progressoFloresta.camadaAtual) {
+            botao.disabled = true;
+        }
+
+        lista.appendChild(botao);
+    }
+}
+
+function atualizarSelecaoCamadasNevada() {
+    const lista = document.querySelector("#lista-camadas-nevada");
+
+    lista.innerHTML = "";
+
+    for (let camada = 1; camada <= progressoNevada.maiorCamadaDesbloqueada; camada++) {
+        const botao = document.createElement("button");
+
+        botao.textContent = `Camada ${camada}`;
+
+        botao.addEventListener("click", function() {
+            progressoNevada.camadaAtual = camada;
+
+            atualizarProgressoNevada();
+            atualizarSelecaoCamadasNevada();
+            window.salvarProgresso();
+        });
+
+        if (camada === progressoNevada.camadaAtual) {
             botao.disabled = true;
         }
 
@@ -144,6 +255,39 @@ function avancarCamada() {
     console.log(`Você avançou para a camada ${proximaCamada}!`);
 }
 
+function avancarCamadaNevada() {
+    const camadaAtual = progressoNevada.camadaAtual;
+
+    if (camadaAtual >= 5) {
+        return;
+    }
+
+    const derrotas = progressoNevada.derrotasPorCamada[camadaAtual] ?? 0;
+
+    if (derrotas < inimigosNecessariosPorCamadaNevada) {
+        return;
+    }
+
+    const proximaCamada = camadaAtual + 1;
+
+    progressoNevada.camadaAtual = proximaCamada;
+
+    if (proximaCamada > progressoNevada.maiorCamadaDesbloqueada) {
+        progressoNevada.maiorCamadaDesbloqueada = proximaCamada;
+    }
+
+    if (progressoNevada.derrotasPorCamada[proximaCamada] === undefined) {
+        progressoNevada.derrotasPorCamada[proximaCamada] = 0;
+    }
+
+    atualizarProgressoNevada();
+    atualizarSelecaoCamadasNevada();
+
+    window.salvarProgresso();
+
+    console.log(`Você avançou para a camada nevada ${proximaCamada}!`);
+}
+
 function iniciarJogo() {
     document.querySelector("#menu-principal").style.display = "none";
     document.querySelector("#tela-jogo").style.display = "flex";
@@ -166,6 +310,7 @@ function respawnAcampamento() {
     document.querySelector("#tela-cidade").style.display = "none";
     document.querySelector("#tela-mercador").style.display = "none";
     document.querySelector("#tela-cacador").style.display = "none";
+    document.querySelector("#tela-nevada").style.display = "none";
 
     document.querySelector("#tela-jogo").style.display = "flex";
 }
@@ -201,6 +346,7 @@ function voltarDoCacador() {
 }
 
 function abrirAreaFlorestal() {
+    regiaoAtual = "floresta";
     document.querySelector("#tela-bifurcacao").style.display = "none";
     document.querySelector("#tela-florestal").style.display = "flex";
 
@@ -224,6 +370,21 @@ function voltarParaFloresta() {
     }
 
     document.querySelector("#tela-combate").style.display = "none";
+    document.querySelector("#tela-florestal").style.display = "flex";
+}
+
+function abrirAreaNevada() {
+    if (!areaNevadaDesbloqueada) return;
+    regiaoAtual = "nevada";
+
+    document.querySelector("#tela-florestal").style.display = "none";
+    document.querySelector("#tela-nevada").style.display = "flex";
+}
+
+function voltarDaAreaNevada() {
+    regiaoAtual = "floresta";
+
+    document.querySelector("#tela-nevada").style.display = "none";
     document.querySelector("#tela-florestal").style.display = "flex";
 }
 
@@ -277,6 +438,18 @@ document.querySelector("#botao-avancar-camada").addEventListener("click", functi
 
 document.querySelector("#botao-voltar-floresta")
     .addEventListener("click", voltarParaFloresta);
+
+document.querySelector("#botao-nevada")
+    .addEventListener("click", abrirAreaNevada);
+
+document.querySelector("#botao-explorar-nevada")
+    .addEventListener("click", explorarNevada);
+
+document.querySelector("#botao-voltar-florestal-nevada")
+    .addEventListener("click", voltarDaAreaNevada);
+
+document.querySelector("#botao-avancar-camada-nevada")
+    .addEventListener("click", function() {avancarCamadaNevada();});
 
 
     //Sistema de moedas do jogador
@@ -696,6 +869,17 @@ function explorarFloresta() {
     }
 
     document.querySelector("#tela-florestal").style.display = "none";
+    document.querySelector("#tela-combate").style.display = "flex";
+
+    iniciarCombate(inimigo);
+}
+
+function explorarNevada() {
+    const inimigo = selecionarInimigo();
+
+    if (!inimigo) return;
+
+    document.querySelector("#tela-nevada").style.display = "none";
     document.querySelector("#tela-combate").style.display = "flex";
 
     iniciarCombate(inimigo);

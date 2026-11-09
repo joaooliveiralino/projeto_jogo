@@ -43,7 +43,7 @@ body{
     padding: 20px;
     box-sizing: border-box;
 
-    background-image: url('../Imagens/acampamentoteste.webp');
+    background-image: url('../Imagens/areas/areas-restantes/Acampamento1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -82,7 +82,7 @@ body{
     color: white;
     text-align: center;
 
-    background-image: url("../Imagens/bifurcacaoteste.webp");
+    background-image: url("../Imagens/areas/areas-restantes/Encruzilhada\ Misteriosa\ na\ Floresta.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -134,7 +134,7 @@ body{
     color: white;
     text-align: center;
 
-    background-image: url("../Imagens/cidadeteste.webp");
+    background-image: url("../Imagens/areas/areas-restantes/Vila\ medieval\ pixel\ art\ com\ castelo.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -192,11 +192,11 @@ body{
 }
 
 #tela-mercador {
-    background-image: url("../Imagens/lojamercadorteste.webp");
+    background-image: url("../Imagens/areas/areas-restantes/Loja\ de\ Poções\ em\ Pixel\ Art.png");
 }
 
 #tela-cacador {
-    background-image: url("../Imagens/lojacacadorteste.webp");
+    background-image: url("../Imagens/areas/areas-restantes/Loja\ Medieval\ de\ Armas\ em\ Pixel\ Art.png");
 }
 
 #tela-mercador h1, #tela-cacador h1 {
@@ -326,6 +326,10 @@ body{
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+}
+
+#tela-combate.combate-nevada {
+    background-image: url("../Imagens/areas/areas-restantes/Combate\ gelado2.jpg");
 }
 
 #tela-combate h1 {
@@ -568,4 +572,103 @@ body{
     color: #ffe5a0;
     cursor: default;
     opacity: 1;
+}
+
+#tela-nevada {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+
+    color: white;
+    text-align: center;
+
+    background-image: url("../Imagens/areas/areas-restantes/Combate\ gelado1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#tela-nevada #progresso-nevada {
+    background: rgba(8, 25, 40, 0.85);
+    border: 2px solid #8bd9f5;
+    border-radius: 10px;
+    padding: 12px 25px;
+    color: #d9f5ff;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px #000;
+}
+
+#tela-nevada #selecao-camadas-nevada {
+    background: rgba(8, 25, 40, 0.85);
+    border: 2px solid #8bd9f5;
+    border-radius: 12px;
+    padding: 15px 25px;
+    margin: 15px 0;
+    width: min(90%, 600px);
+    box-sizing: border-box;
+}
+
+#tela-nevada #selecao-camadas-nevada h2 {
+    color: #bceeff;
+    text-shadow: 2px 2px 4px #000;
+}
+
+#tela-nevada button {
+    background: linear-gradient(
+        180deg,
+        #24465c,
+        #142b3b
+    );
+
+    color: #e3f7ff;
+    border: 2px solid #8bd9f5;
+    border-radius: 8px;
+    padding: 12px 20px;
+    margin: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#tela-nevada button:hover {
+    background: linear-gradient(
+        180deg,
+        #39718f,
+        #1e4963
+    );
+
+    border-color: #d9f5ff;
+    transform: scale(1.05);
+}
+
+#tela-nevada #aviso-proxima-camada-nevada {
+    background: rgba(12, 45, 65, 0.92);
+    border: 2px solid #bceeff;
+    border-radius: 10px;
+    padding: 12px 20px;
+    color: #e3f7ff;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px #000;
+    box-shadow: 0 0 12px rgba(139, 217, 245, 0.4);
+}
+
+#tela-nevada h1 {
+    color: #d9f5ff;
+    font-size: 2.5rem;
+    text-shadow:
+        2px 2px 4px #000,
+        0 0 12px #58bde8;
+    margin-bottom: 15px;
+}
+
+#tela-nevada > p {
+    color: #e3f7ff;
+    font-size: 1.1rem;
+    text-shadow: 2px 2px 4px #000;
+    max-width: 650px;
+    line-height: 1.5;
 }

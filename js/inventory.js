@@ -29,150 +29,160 @@
     // Armas Fisicas
     //mk('espada-base-1', 'Espada Base', 'arma', 'arma', { 'AT': 1, 'CC': 1 }, 'imagens/itens/espadateste.webp', 'fisico'),
 
-    mk('porrete-1', 'Porrete', 'arma', 'arma', { 'AT': 3 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-quebrada-1', 'Espada Quebrada', 'arma', 'arma', { 'AT': 5 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-restaurada-1', 'Espada Restaurada', 'arma', 'arma', { 'AT': 8, 'CC': 1.5 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-media-1', 'Espada Media', 'arma', 'arma', { 'AT': 10, 'CC': 2.5 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-longa-1', 'Espada Longa', 'arma', 'arma', { 'AT': 13, 'CC': 3, 'CA': 50 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('adaga-presa-serpente-1', 'Adaga Presa de Serpente', 'arma', 'arma', { 'AT': 15, 'CC': 2, 'CA': 50, 'AG': 5 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-floresta-viva-1', 'Espada da Floresta Viva', 'arma', 'arma', { 'AT': 18, 'CA': 150 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-grama-1', 'Espada de Grama', 'arma', 'arma', { 'AT': 30, 'CC': 5, 'CA': 100, 'AG': 10 }, 'imagens/itens/espadateste.webp', 'fisico'),
+    mk('porrete-1', 'Porrete', 'arma', 'arma', { 'AT': 3 }, 'imagens/itens/itens-geral/itens/Porrete.png', 'fisico'),
+    mk('espada-quebrada-1', 'Espada Quebrada', 'arma', 'arma', { 'AT': 5 }, 'imagens/itens/itens-geral/itens/Espada_Quebrada.png', 'fisico'),
+    mk('espada-restaurada-1', 'Espada Restaurada', 'arma', 'arma', { 'AT': 8, 'CC': 1.5 }, 'imagens/itens/itens-geral/itens/Espada_Restaurada.png', 'fisico'),
+    mk('espada-media-1', 'Espada Media', 'arma', 'arma', { 'AT': 10, 'CC': 2.5 }, 'imagens/itens/itens-geral/itens/Espada_Media.png', 'fisico'),
+    mk('espada-longa-1', 'Espada Longa', 'arma', 'arma', { 'AT': 13, 'CC': 3, 'CA': 50 }, 'imagens/itens/itens-geral/itens/Espada_Grande.png', 'fisico'),
+    mk('adaga-presa-serpente-1', 'Adaga Presa de Serpente', 'arma', 'arma', { 'AT': 15, 'CC': 2, 'CA': 50, 'AG': 5 }, 'imagens/itens/itens-geral/itens/Adaga_Presa_Serpente.png', 'fisico'),
+    mk('espada-floresta-viva-1', 'Espada da Floresta Viva', 'arma', 'arma', { 'AT': 18, 'CA': 150 }, 'imagens/itens/itens-geral/itens/Espada_da_floresta_viva.png', 'fisico'),
+    mk('espada-grama-1', 'Espada de Grama', 'arma', 'arma', { 'AT': 30, 'CC': 5, 'CA': 100, 'AG': 10 }, 'imagens/itens/itens-geral/itens/Espada_Grama.png', 'fisico'),
 
-    mk('adaga-presa-lobo-1', 'Adaga Presa de Lobo', 'arma', 'arma', { 'AT': 25, 'CC': 4, 'CA': 50, 'AG': 4 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('foice-congelada-eternamente-1', 'Foice Eternamente Congelada', 'arma', 'arma', { 'AT': 40, 'CC': 6, 'CA': 100 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-congelada-1', 'Espada Congelada', 'arma', 'arma', { 'AT': 30, 'CC': 10, 'CA': 50, 'AG': 2 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('adaga-faminta-1', 'Adaga Faminta', 'arma', 'arma', { 'AT': 70, 'CC': 10, 'CA': 100, 'AG': 6 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-gelo-1', 'Espada de gelo', 'arma', 'arma', { 'AT': 100, 'CC': 15, 'CA': 150, 'AG': 2 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-abissal-1', 'Espada Abissal', 'arma', 'arma', { 'AT': 20, 'CC': 40, 'CA': 450, 'AG': 15 }, 'imagens/itens/espadateste.webp', 'fisico'),
-    mk('espada-elemental-1', 'Espada Elemental', 'arma', 'arma', { 'AT': 150, 'CC': 10, 'CA': 200, 'AG': 10 }, 'imagens/itens/espadateste.webp', 'fisico'),
+    mk('adaga-presa-lobo-1', 'Adaga Presa de Lobo', 'arma', 'arma', { 'AT': 25, 'CC': 4, 'CA': 50, 'AG': 4 }, 'imagens/itens/itens-geral/itens/Adaga_presa_lobo.png', 'fisico'),
+    mk('foice-congelada-eternamente-1', 'Foice Eternamente Congelada', 'arma', 'arma', { 'AT': 40, 'CC': 6, 'CA': 100 }, 'imagens/itens/itens-geral/itens/Foice_eternamente_congelada.png', 'fisico'),
+    mk('espada-congelada-1', 'Espada Congelada', 'arma', 'arma', { 'AT': 30, 'CC': 10, 'CA': 50, 'AG': 2 }, 'imagens/itens/itens-geral/itens/Espada_congelada.png', 'fisico'),
+    mk('adaga-faminta-1', 'Adaga Faminta', 'arma', 'arma', { 'AT': 70, 'CC': 10, 'CA': 100, 'AG': 6 }, 'imagens/itens/itens-geral/itens/Adaga_faminta.png', 'fisico'),
+    mk('espada-gelo-1', 'Espada de gelo', 'arma', 'arma', { 'AT': 100, 'CC': 15, 'CA': 150, 'AG': 2 }, 'imagens/itens/itens-geral/itens/Espada_gelo.png', 'fisico'),
+    mk('espada-abissal-1', 'Espada Abissal', 'arma', 'arma', { 'AT': 20, 'CC': 40, 'CA': 450, 'AG': 15 }, 'imagens/itens/itens-geral/itens/Espada_Abissal.png', 'fisico'),
+    mk('espada-elemental-1', 'Espada Elemental', 'arma', 'arma', { 'AT': 150, 'CC': 10, 'CA': 200, 'AG': 10 }, 'imagens/itens/itens-geral/itens/Espada_elemental.png', 'fisico'),
 
     //Armas Magicas
     //mk('cajado-base-1', 'Cajado base', 'arma', 'arma', { 'AP': 1, 'MP': 1 }, 'imagens/itens/espadateste.webp', 'magico',),
 
-    mk('graveto-1', 'Graveto', 'arma', 'arma', { 'AP': 5, 'MP': 3 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-quebrado-1', 'Cajado Quebrado', 'arma', 'arma', { 'AP': 8, 'MP': 5 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-restaurado-1', 'Cajado Restaurado', 'arma', 'arma', { 'AP': 10, 'MP': 7 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-basico-1', 'Cajado Básico', 'arma', 'arma', { 'AP': 15, 'MP': 10 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-magico-1', 'Cajado Magico', 'arma', 'arma', { 'AP': 20, 'MP': 15 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-ventos-1', 'Cajado dos Ventos', 'arma', 'arma', { 'AP': 35, 'MP': 20 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-vivo-1', 'Cajado Vivo', 'arma', 'arma', { 'AP': 45, 'MP': 25 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-jardim-1', 'Cajado do Jardim', 'arma', 'arma', { 'AP': 60, 'MP': 30 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-grama-1', 'Cajado de Grama', 'arma', 'arma', { 'AP': 30, 'MP': 60 }, 'imagens/itens/espadateste.webp', 'magico',),
+    mk('graveto-1', 'Graveto', 'arma', 'arma', { 'AP': 5, 'MP': 3 }, 'imagens/itens/itens-geral/itens/Galho.png', 'magico',),
+    mk('cajado-quebrado-1', 'Cajado Quebrado', 'arma', 'arma', { 'AP': 8, 'MP': 5 }, 'imagens/itens/itens-geral/itens/Cajado_quebrado.png', 'magico',),
+    mk('cajado-restaurado-1', 'Cajado Restaurado', 'arma', 'arma', { 'AP': 10, 'MP': 7 }, 'imagens/itens/itens-geral/itens/Cajado_Renovado.png', 'magico',),
+    mk('cajado-basico-1', 'Cajado Básico', 'arma', 'arma', { 'AP': 15, 'MP': 10 }, 'imagens/itens/itens-geral/itens/Cajado_Básico.png', 'magico',),
+    mk('cajado-magico-1', 'Cajado Magico', 'arma', 'arma', { 'AP': 20, 'MP': 15 }, 'imagens/itens/itens-geral/itens/Cajado_Magico.png', 'magico',),
+    mk('cajado-ventos-1', 'Cajado dos Ventos', 'arma', 'arma', { 'AP': 35, 'MP': 20 }, 'imagens/itens/itens-geral/itens/Cajado_vento.png', 'magico',),
+    mk('cajado-vivo-1', 'Cajado Vivo', 'arma', 'arma', { 'AP': 45, 'MP': 25 }, 'imagens/itens/itens-geral/itens/Cajado_vivo.png', 'magico',),
+    mk('cajado-jardim-1', 'Cajado do Jardim', 'arma', 'arma', { 'AP': 60, 'MP': 30 }, 'imagens/itens/itens-geral/itens/Cajado_Jardim.png', 'magico',),
+    mk('cajado-grama-1', 'Cajado de Grama', 'arma', 'arma', { 'AP': 30, 'MP': 60 }, 'imagens/itens/itens-geral/itens/Cajado_Grama.png', 'magico',),
 
-    mk('cajado-invernal-1', 'Cajado Invernal', 'arma', 'arma', { 'AP': 85, 'MP': 30 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-gelo-1', 'Cajado de Gelo', 'arma', 'arma', { 'AP': 55, 'MP': 100 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-abissal-1', 'Cajado Abissal', 'arma', 'arma', { 'AP': 200, 'MP': -50 }, 'imagens/itens/espadateste.webp', 'magico',),
-    mk('cajado-elemental-1', 'Cajado Elemental', 'arma', 'arma', { 'AP': 80, 'MP': 200 }, 'imagens/itens/espadateste.webp', 'magico',),
+    mk('cajado-invernal-1', 'Cajado Invernal', 'arma', 'arma', { 'AP': 85, 'MP': 30 }, 'imagens/itens/itens-geral/itens/Cajado_invernal.png', 'magico',),
+    mk('cajado-gelo-1', 'Cajado de Gelo', 'arma', 'arma', { 'AP': 55, 'MP': 100 }, 'imagens/itens/itens-geral/itens/Cajado_gelo.png', 'magico',),
+    mk('cajado-abissal-1', 'Cajado Abissal', 'arma', 'arma', { 'AP': 200, 'MP': -50 }, 'imagens/itens/itens-geral/itens/Cajado_abissal.png', 'magico',),
+    mk('cajado-elemental-1', 'Cajado Elemental', 'arma', 'arma', { 'AP': 80, 'MP': 200 }, 'imagens/itens/itens-geral/itens/Cajado_elemental.png', 'magico',),
 
     //Aneis
     //mk('anel-base-1', 'Anel base', 'acessorio', 'anel', { 'HP': 1, 'MP': 1, 'AT': 1, 'AP': 1, 'FD': 1, 'MD': 1, 'AG': 1, 'CC': 1, 'CA': 1, }),
 
-    mk('anel-pesado-1', 'Anel Pesado', 'acessorio', 'anel', { 'HP': 20, 'FD': 5, 'MD': 5 }),
-    mk('anel-rapido-1', 'Anel Rápido', 'acessorio', 'anel', { 'HP': -30, 'AG': 7 }),
-    mk('anel-fisico-1', 'Anel Fisico', 'acessorio', 'anel', { 'AT': 6, 'FD': 4, 'CA': 50 }),
-    mk('anel-magico-1', 'Anel Magico', 'acessorio', 'anel', { 'MP': 15, 'AP': 6, 'MD': 4 }),
-    mk('anel-perigoso-1', 'Anel Perigoso', 'acessorio', 'anel', { 'AT': 5, 'AP': 5, 'CC': 3 }),
-    mk('anel-critico-1', 'Anel Critico', 'acessorio', 'anel', { 'CC': 10, 'CA': 75 }),
-    mk('anel-assasino-1', 'Anel Assasino', 'acessorio', 'anel', { 'AT': 5, 'AG': 7 }),
-    mk('anel-golem-1', 'Anel Golem', 'acessorio', 'anel', { 'HP': 25, 'AP': 4, 'FD': 6 }),
-    mk('anel-suporte-1', 'Anel Suporte', 'acessorio', 'anel', { 'HP': 20, 'MP': 25, 'AG': 4 }),
-    mk('anel-abencoado-1', 'Anel Abençoado', 'acessorio', 'anel', { 'HP': 10, 'MP': 15, 'AT': 3, 'AP': 3, 'FD': 4, 'MD': 4, 'AG': 5, 'CC': 2, 'CA': 50 }),
+    mk('anel-pesado-1', 'Anel Pesado', 'acessorio', 'anel', { 'HP': 20, 'FD': 5, 'MD': 5 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_pesado.png'),
+    mk('anel-rapido-1', 'Anel Rápido', 'acessorio', 'anel', { 'HP': -30, 'AG': 7 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_velocidade.png'),
+    mk('anel-fisico-1', 'Anel Fisico', 'acessorio', 'anel', { 'AT': 6, 'FD': 4, 'CA': 50 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_força.png'),
+    mk('anel-magico-1', 'Anel Magico', 'acessorio', 'anel', { 'MP': 15, 'AP': 6, 'MD': 4 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_magico.png'),
+    mk('anel-perigoso-1', 'Anel Perigoso', 'acessorio', 'anel', { 'AT': 5, 'AP': 5, 'CC': 3 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_perigoso.png'),
+    mk('anel-critico-1', 'Anel Critico', 'acessorio', 'anel', { 'CC': 10, 'CA': 75 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_critico.png'),
+    mk('anel-assasino-1', 'Anel Assasino', 'acessorio', 'anel', { 'AT': 5, 'AG': 7 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_Assasino.png'),
+    mk('anel-golem-1', 'Anel Golem', 'acessorio', 'anel', { 'HP': 25, 'AP': 4, 'FD': 6 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_golem.png'),
+    mk('anel-suporte-1', 'Anel Suporte', 'acessorio', 'anel', { 'HP': 20, 'MP': 25, 'AG': 4 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_suporte.png'),
+    mk('anel-abencoado-1', 'Anel Abençoado', 'acessorio', 'anel', { 'HP': 10, 'MP': 15, 'AT': 3, 'AP': 3, 'FD': 4, 'MD': 4, 'AG': 5, 'CC': 2, 'CA': 50 }, 'imagens/itens/itens-geral/itens/ANEIS/Anel_Abençoado.png'),
 
     //Colares
     //mk('colar-base-1', 'Colar base', 'acessorio', 'colar', { 'HP': 1 }),
 
-    mk('colar-pesado-1', 'Colar Pesado', 'acessorio', 'colar', { 'HP': 20, 'MD': 5, 'FD': 5 }),
-    mk('colar-rapido-1', 'Colar Rapido', 'acessorio', 'colar', { 'HP': -30, 'AG': 7 }),
-    mk('colar-fisico-1', 'Colar Fisico', 'acessorio', 'colar', { 'AT': 6, 'FD': 4, 'CC': 2 }),
-    mk('colar-magico-1', 'Colar Magico', 'acessorio', 'colar', { 'MP': 15, 'MD': 4, 'AP': 6 }),
-    mk('colar-perigoso-1', 'Colar Perigoso', 'acessorio', 'colar', { 'AT': 5, 'AP': 5, 'CA': 50 }),
-    mk('colar-critico-1', 'Colar Critico', 'acessorio', 'colar', { 'CC': 5, 'CA': 50 }),
-    mk('colar-assasino-1', 'Colar Assasino', 'acessorio', 'colar', { 'AT': 5, 'AG': 7 }),
-    mk('colar-golem-1', 'Colar Golem', 'acessorio', 'colar', { 'HP': 25, 'AP': 4, 'FD': 7 }),
-    mk('colar-suporte-1', 'Colar Suporte', 'acessorio', 'colar', { 'HP': 20, 'MP': 25, 'AG': 4 }),
-    mk('colar-abencoado-1', 'Colar Abençoado', 'acessorio', 'colar', { 'HP': 10, 'AT': 3, 'AP': 3, 'FD': 4, 'MD': 4, 'AG': 5, 'MP': 15, 'CC': 2, 'CA': 50 }),
+    mk('colar-pesado-1', 'Colar Pesado', 'acessorio', 'colar', { 'HP': 20, 'MD': 5, 'FD': 5 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_pesado.png'),
+    mk('colar-rapido-1', 'Colar Rapido', 'acessorio', 'colar', { 'HP': -30, 'AG': 7 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_velocidade.png'),
+    mk('colar-fisico-1', 'Colar Fisico', 'acessorio', 'colar', { 'AT': 6, 'FD': 4, 'CC': 2 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_forca.png'),
+    mk('colar-magico-1', 'Colar Magico', 'acessorio', 'colar', { 'MP': 15, 'MD': 4, 'AP': 6 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_magico.png'),
+    mk('colar-perigoso-1', 'Colar Perigoso', 'acessorio', 'colar', { 'AT': 5, 'AP': 5, 'CA': 50 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_perigoso.png'),
+    mk('colar-critico-1', 'Colar Critico', 'acessorio', 'colar', { 'CC': 5, 'CA': 50 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_Crítico.png'),
+    mk('colar-assasino-1', 'Colar Assasino', 'acessorio', 'colar', { 'AT': 5, 'AG': 7 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_Assasino.png'),
+    mk('colar-golem-1', 'Colar Golem', 'acessorio', 'colar', { 'HP': 25, 'AP': 4, 'FD': 7 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_Golem.png'),
+    mk('colar-suporte-1', 'Colar Suporte', 'acessorio', 'colar', { 'HP': 20, 'MP': 25, 'AG': 4 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_suporte.png'),
+    mk('colar-abencoado-1', 'Colar Abençoado', 'acessorio', 'colar', { 'HP': 10, 'AT': 3, 'AP': 3, 'FD': 4, 'MD': 4, 'AG': 5, 'MP': 15, 'CC': 2, 'CA': 50 }, 'imagens/itens/itens-geral/itens/COLARES/Colar_abencoado.png'),
 
     //Armaduras
     //mk('capacete-base-1', 'Capacete base', 'armadura', 'capacete', { 'FD': 3, 'MD': 1 }),
     //mk('peitoral-base-1', 'Peitoral base', 'armadura', 'peitoral', { 'FD': 6, 'MD': 2 }),
     //mk('botas-base-1', 'Botas base', 'armadura', 'bota', { 'FD': 2, 'AG': 1 }),
 
-    mk('capacete-ferro-1', 'Capacete de Ferro', 'armadura', 'capacete', { 'FD': 1, 'MD': 1 }),
-    mk('peitoral-ferro-1', 'Peitoral de Ferro', 'armadura', 'peitoral', { 'FD': 2, 'MD': 2 }),
-    mk('botas-ferro-1', 'Botas de Ferro', 'armadura', 'bota', { 'FD': 1, 'AG': 1 }),
-    mk('capacete-couro-javali-1', 'Capacete de Couro de Javali', 'armadura', 'capacete', { 'FD': 2, 'MD': 1 }),
-    mk('peitoral-couro-javali-1', 'Peitoral de Couro de Javali', 'armadura', 'peitoral', { 'FD': 3, 'MD': 2 }),
-    mk('botas-couro-javali-1', 'Botas de Couro de Javali', 'armadura', 'bota', { 'FD': 1, 'AG': 1 }),
-    mk('capacete-escama-serpente-1', 'Capacete de Escama de Serpente', 'armadura', 'capacete', { 'FD': 3, 'MD': 2 }),
-    mk('peitoral-escama-serpente-1', 'Peitoral de Escama de Serpente', 'armadura', 'peitoral', { 'FD': 5, 'MD': 3 }),
-    mk('botas-escama-serpente-1', 'Botas de Escama de Serpente', 'armadura', 'bota', { 'FD': 2, 'AG': 1 }),
-    mk('capacete-madeira-viva-1', 'Capacete de Madeira Viva', 'armadura', 'capacete', { 'FD': 3, 'MD': 4 }),
-    mk('peitoral-madeira-viva-1', 'Peitoral de Madeira Viva', 'armadura', 'peitoral', { 'FD': 5, 'MD': 6 }),
-    mk('botas-madeira-viva-1', 'Botas de Madeira Viva', 'armadura', 'bota', { 'FD': 3, 'AG': 2 }),
-    mk('capacete-fundador-1', 'Capacete Fundador', 'armadura', 'capacete', { 'FD': 5, 'MD': 5 }),
-    mk('peitoral-fundador-1', 'Peitoral Fundador', 'armadura', 'peitoral', { 'FD': 7, 'MD': 7 }),
-    mk('botas-fundador-1', 'Botas Fundador', 'armadura', 'bota', { 'FD': 4, 'AG': 4 }),
-    mk('capacete-grama-1', 'Capacete de Grama', 'armadura', 'capacete', { 'FD': -4, 'MD': 9 }),
-    mk('peitoral-grama-1', 'Peitoral de Grama', 'armadura', 'peitoral', { 'FD': -6, 'MD': 12 }),
-    mk('botas-grama-1', 'Botas de Grama', 'armadura', 'bota', { 'FD': -2, 'AG': 6 }),
-    mk('capacete-couro-lobo-1', 'Capacete de Couro de Lobo', 'armadura', 'capacete', { 'FD': 7, 'MD': 5 }),
-    mk('peitoral-couro-lobo-1', 'Peitoral de Couro de Lobo', 'armadura', 'peitoral', { 'FD': 9, 'MD': 6 }),
-    mk('botas-couro-lobo-1', 'Botas de Couro de Lobo', 'armadura', 'bota', { 'FD': 5, 'AG': 4 }),
-    mk('capacete-presas-nevadas-1', 'Capacete das Presas Nevadas', 'armadura', 'capacete', { 'FD': 9, 'MD': 4 }),
-    mk('peitoral-presas-nevadas-1', 'Peitoral das Presas Nevadas', 'armadura', 'peitoral', { 'FD': 12, 'MD': 5 }),
-    mk('botas-presas-nevadas-1', 'Botas das Presas Nevadas', 'armadura', 'bota', { 'FD': 7, 'AG': 3 }),
-    mk('capacete-gelo-1', 'Capacete de Gelo', 'armadura', 'capacete', { 'FD': 10, 'MD': 10 }),
-    mk('peitoral-gelo-1', 'Peitoral de gelo', 'armadura', 'peitoral', { 'FD': 14, 'MD': 14 }),
-    mk('botas-gelo-1', 'Botas de Gelo', 'armadura', 'bota', { 'FD': 8, 'AG': 8 }),
-    mk('capacete-ancestral-1', 'Capacete Ancestral', 'armadura', 'capacete', { 'FD': 16, 'MD': 16 }),
-    mk('peitoral-ancestral-1', 'Peitoral Ancestral', 'armadura', 'peitoral', { 'FD': 20, 'MD': 20 }),
-    mk('botas-ancestral-1', 'Botas Ancestrais', 'armadura', 'bota', { 'FD': 12, 'AG': 15 }),
+    mk('capacete-ferro-1', 'Capacete de Ferro', 'armadura', 'capacete', { 'FD': 1, 'MD': 1 }, 'imagens/itens/armaduras/C_ferro.png'),
+    mk('peitoral-ferro-1', 'Peitoral de Ferro', 'armadura', 'peitoral', { 'FD': 2, 'MD': 2 }, 'imagens/itens/armaduras/P_ferro.png'),
+    mk('botas-ferro-1', 'Botas de Ferro', 'armadura', 'bota', { 'FD': 1, 'AG': 1 }, 'imagens/itens/armaduras/B_ferro.png'),
+    mk('capacete-couro-javali-1', 'Capacete de Couro de Javali', 'armadura', 'capacete', { 'FD': 2, 'MD': 1 }, 'imagens/itens/armaduras/C_Javali.png'),
+    mk('peitoral-couro-javali-1', 'Peitoral de Couro de Javali', 'armadura', 'peitoral', { 'FD': 3, 'MD': 2 }, 'imagens/itens/armaduras/P_Javali.png'),
+    mk('botas-couro-javali-1', 'Botas de Couro de Javali', 'armadura', 'bota', { 'FD': 1, 'AG': 1 }, 'imagens/itens/armaduras/B_Javali.png'),
+    mk('capacete-escama-serpente-1', 'Capacete de Escama de Serpente', 'armadura', 'capacete', { 'FD': 3, 'MD': 2 }, 'imagens/itens/armaduras/C_Serpente.png'),
+    mk('peitoral-escama-serpente-1', 'Peitoral de Escama de Serpente', 'armadura', 'peitoral', { 'FD': 5, 'MD': 3 }, 'imagens/itens/armaduras/P_Serpente.png'),
+    mk('botas-escama-serpente-1', 'Botas de Escama de Serpente', 'armadura', 'bota', { 'FD': 2, 'AG': 1 }, 'imagens/itens/armaduras/B_ferro.png'),
+    mk('capacete-madeira-viva-1', 'Capacete de Madeira Viva', 'armadura', 'capacete', { 'FD': 3, 'MD': 4 }, 'imagens/itens/armaduras/C_Madeira_viva.png'),
+    mk('peitoral-madeira_viva-1', 'Peitoral de Madeira Viva', 'armadura', 'peitoral', { 'FD': 5, 'MD': 6 }, 'imagens/itens/armaduras/P_madeira_viva.png'),
+    mk('botas-madeira-viva-1', 'Botas de Madeira Viva', 'armadura', 'bota', { 'FD': 3, 'AG': 2 }, 'imagens/itens/armaduras/B_Madeira_viva.png'),
+    mk('capacete-fundador-1', 'Capacete Fundador', 'armadura', 'capacete', { 'FD': 5, 'MD': 5 }, 'imagens/itens/armaduras/C_fundador.png'),
+    mk('peitoral-fundador-1', 'Peitoral Fundador', 'armadura', 'peitoral', { 'FD': 7, 'MD': 7 }, 'imagens/itens/armaduras/P_fundador.png'),
+    mk('botas-fundador-1', 'Botas Fundador', 'armadura', 'bota', { 'FD': 4, 'AG': 4 }, 'imagens/itens/armaduras/B_fundador.png'),
+    mk('capacete-grama-1', 'Capacete de Grama', 'armadura', 'capacete', { 'FD': -4, 'MD': 9 }, 'imagens/itens/armaduras/C_Grama.png'),
+    mk('peitoral-grama-1', 'Peitoral de Grama', 'armadura', 'peitoral', { 'FD': -6, 'MD': 12 }, 'imagens/itens/armaduras/P_Grama.png'),
+    mk('botas-grama-1', 'Botas de Grama', 'armadura', 'bota', { 'FD': -2, 'AG': 6 }, 'imagens/itens/armaduras/B_Grama.png'),
+    mk('capacete-couro-lobo-1', 'Capacete de Couro de Lobo', 'armadura', 'capacete', { 'FD': 7, 'MD': 5 }, 'imagens/itens/armaduras/C_lobo.png'),
+    mk('peitoral-couro-lobo-1', 'Peitoral de Couro de Lobo', 'armadura', 'peitoral', { 'FD': 9, 'MD': 6 }, 'imagens/itens/armaduras/P_lobo.png'),
+    mk('botas-couro-lobo-1', 'Botas de Couro de Lobo', 'armadura', 'bota', { 'FD': 5, 'AG': 4 }, 'imagens/itens/armaduras/B_lobo.png'),
+    mk('capacete-presas-nevadas-1', 'Capacete das Presas Nevadas', 'armadura', 'capacete', { 'FD': 9, 'MD': 4 }, 'imagens/itens/armaduras/C_Presas_nevadas.png'),
+    mk('peitoral-presas-nevadas-1', 'Peitoral das Presas Nevadas', 'armadura', 'peitoral', { 'FD': 12, 'MD': 5 }, 'imagens/itens/armaduras/P_Presas_nevadas.png'),
+    mk('botas-presas-nevadas-1', 'Botas das Presas Nevadas', 'armadura', 'bota', { 'FD': 7, 'AG': 3 }, 'imagens/itens/armaduras/B_presas_nevadas.png'),
+    mk('capacete-gelo-1', 'Capacete de Gelo', 'armadura', 'capacete', { 'FD': 10, 'MD': 10 }, 'imagens/itens/armaduras/C_Gelo.png'),
+    mk('peitoral-gelo-1', 'Peitoral de gelo', 'armadura', 'peitoral', { 'FD': 14, 'MD': 14 }, 'imagens/itens/armaduras/P_Gelo.png'),
+    mk('botas-gelo-1', 'Botas de Gelo', 'armadura', 'bota', { 'FD': 8, 'AG': 8 }, 'imagens/itens/armaduras/B_Gelo.png'),
+    mk('capacete-ancestral-1', 'Capacete Ancestral', 'armadura', 'capacete', { 'FD': 16, 'MD': 16 }, 'imagens/itens/armaduras/C_End\ game.png'),
+    mk('peitoral-ancestral-1', 'Peitoral Ancestral', 'armadura', 'peitoral', { 'FD': 20, 'MD': 20 }, 'imagens/itens/armaduras/P_End\ game.png'),
+    mk('botas-ancestral-1', 'Botas Ancestrais', 'armadura', 'bota', { 'FD': 12, 'AG': 15 }, 'imagens/itens/armaduras/B_End\ game.png'),
 
     //Poções
     //mk('pocao-vida-base-1', 'Poção de Vida', 'pocao', null, {}, null, null, { curaVida: 30 }),
     //mk('pocao-mana-base-1', 'Poção de Mana', 'pocao', null, {}, null, null, { curaMana: 25 }),
 
-    mk('pocao-vida-basica-1', 'Poção de Vida Basica', 'pocao', null, {}, null, null, { curaVida: 10 }),
-    mk('pocao-mana-basica-1', 'Poção de Mana Basica', 'pocao', null, {}, null, null, { curaMana: 15 }),
-    mk('pocao-vida-intermediaria-1', 'Poção de Vida Intermediaria', 'pocao', null, {}, null, null, { curaVida: 30 }),
-    mk('pocao-mana-intermediaria-1', 'Poção de Mana Intermediaria', 'pocao', null, {}, null, null, { curaMana: 25 }),
-    mk('pocao-vida-avancada-1', 'Poção de Vida Avançada', 'pocao', null, {}, null, null, { curaVida: 60 }),
-    mk('pocao-mana-avancada-1', 'Poção de Mana Avançada', 'pocao', null, {}, null, null, { curaMana: 50 }),
+    mk('pocao-vida-basica-1', 'Poção de Vida Basica', 'pocao', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Pocao_Vida_Basica.png', null, { curaVida: 10 }),
+
+    mk('pocao-mana-basica-1', 'Poção de Mana Basica', 'pocao', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Pocao_Mana_Basica.png', null, { curaMana: 15 }),
+
+    mk('pocao-vida-intermediaria-1', 'Poção de Vida Intermediaria', 'pocao', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Pocao_Vida_Intermediario.png', null, { curaVida: 30 }),
+
+    mk('pocao-mana-intermediaria-1', 'Poção de Mana Intermediaria', 'pocao', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Pocao_Mana_Intermediaria.png', null, { curaMana: 25 }),
+
+    mk('pocao-vida-avancada-1', 'Poção de Vida Avançada', 'pocao', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Pocao_Vida_Avancado.png', null, { curaVida: 60 }),
+
+    mk('pocao-mana-avancada-1', 'Poção de Mana Avançada', 'pocao', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Pocao_Mana_Avancado.png', null, { curaMana: 50 }),
 
     //Alimentos
     //mk('alimento-base', 'alimento base', 'comida', null, { curaVida: 1, curaMana: 1}),
 
-    mk('maca', 'Maçã', 'comida', null, {}, null, null, { curaVida: 10, curaMana: 5 }),
-    mk('banana', 'Banana', 'comida', null, {}, null, null, { curaVida: 10, curaMana: 5 }),
-    mk('carne', 'Carne', 'comida', null, {}, null, null, { curaVida: 20, curaMana: 8 }),
-    mk('batata-frita', 'Batata Frita', 'comida', null, {}, null, null, { curaVida: 20, curaMana: 8 }),
-    mk('chimarrao', 'Chimarrão', 'comida', null, {}, null, null, { curaVida: 45, curaMana: 16 }),
-    mk('pao-mortadela', 'Pão com Mortadela', 'comida', null, {}, null, null, { curaVida: 45, curaMana: 16 }),
+    mk('maca', 'Maçã', 'comida', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Alimento_basico.png', null, { curaVida: 10, curaMana: 5 }),
+
+    mk('banana', 'Banana', 'comida', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Alimento_basico2.png', null, { curaVida: 10, curaMana: 5 }),
+
+    mk('carne', 'Carne', 'comida', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Alimento_Intermediario.png', null, { curaVida: 20, curaMana: 8 }),
+
+    mk('batata-frita', 'Batata Frita', 'comida', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Alimento_Intermediario2.png', null, { curaVida: 20, curaMana: 8 }),
+
+    mk('chimarrao', 'Chimarrão', 'comida', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Alimento_Avançado.png', null, { curaVida: 45, curaMana: 16 }),
+
+    mk('pao-mortadela', 'Pão com Mortadela', 'comida', null, {}, 'imagens/itens/itens-geral/itens/ACESSORIOS/Alimento_Avançado.png', null, { curaVida: 45, curaMana: 16 }),
 
     //Materiais
     //mk('material-base', 'materialbase', 'material', null, {}),
 
-    mk('gosma', 'Gosma', 'material', null, {}),
-    mk('pedra', 'Pedra', 'material', null, {}),
-    mk('madeira', 'Madeira', 'material', null, {}),
-    mk('presa-serpente', 'Presas de Serpente', 'material', null, {}),
-    mk('escama-serpente', 'Escamas de Serpente', 'material', null, {}),
-    mk('couro-javali', 'Couro de Javali', 'material', null, {}),
-    mk('esfera-magica', 'Esfera Magica', 'material', null, {}),
-    mk('madeira-viva', 'Madeira Viva', 'material', null, {}),
+    mk('gosma', 'Gosma', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Gosma.png'),
+    mk('pedra', 'Pedra', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Pedra.png'),
+    mk('madeira', 'Madeira', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Madeira.png'),
+    mk('presa-serpente', 'Presas de Serpente', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Presa_de_serpente.png'),
+    mk('escama-serpente', 'Escamas de Serpente', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Escama_de_serpente.png'),
+    mk('couro-javali', 'Couro de Javali', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Couro.png'),
+    mk('esfera-magica', 'Esfera Magica', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Esfera_mágica.png'),
+    mk('madeira-viva', 'Madeira Viva', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Madeira_viva.png'),
     mk('folha-viva', 'Folha Viva', 'material', null, {}),
-    mk('gema-jardim', 'Gema do Jardim', 'material', null, {}),
-    mk('lasca-fundador', 'Lasca do Fundador', 'material', null, {}),
-    mk('elemento-grama', 'Elemente de Grama', 'material', null, {}),
-    mk('presa-lobo', 'Presa de Lobo', 'material', null, {}),
-    mk('couro-lobo', 'Couro de Lobo', 'material', null, {}),
-    mk('cabo-foice-congelada', 'Cabo de Foice Congelada', 'material', null, {}),
-    mk('pedaco-gelo-eterno', 'Pedaço de Gelo Eterno', 'material', null, {}),
-    mk('presas-nevasca', 'Presas da Nevasca', 'material', null, {}),
-    mk('pele-congelada', 'Pele Congelada', 'material', null, {}),
-    mk('neve-magica', 'Neve Magica', 'material', null, {}),
-    mk('fragmento-gelo-compactado', 'Fragemento de Gelo Compactado', 'material', null, {}),
-    mk('elemento-gelo', 'Elemento de Gelo', 'material', null, {}),
+    mk('gema-jardim', 'Gema do Jardim', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Gema_do_Jardim.png'),
+    mk('lasca-fundador', 'Lasca do Fundador', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Lasca_do_fundador.png'),
+    mk('elemento-grama', 'Elemente de Grama', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Elemento_grama.png'),
+    mk('presa-lobo', 'Presa de Lobo', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Presa_lobo.png'),
+    mk('couro-lobo', 'Couro de Lobo', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Couro_de_lobo.png'),
+    mk('cabo-foice-congelada', 'Cabo de Foice Congelada', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Cabo_foirce_congelada.png'),
+    mk('pedaco-gelo-eterno', 'Pedaço de Gelo Eterno', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Pedaco_de_gelo_eterno.png'),
+    mk('presas-nevasca', 'Presas da Nevasca', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Presas_da_nevasca.png'),
+    mk('pele-congelada', 'Pele Congelada', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Pele_congelada.png'),
+    mk('neve-magica', 'Neve Magica', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Neve_mágica.png'),
+    mk('fragmento-gelo-compactado', 'Fragemento de Gelo Compactado', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Gelo_compactado.png'),
+    mk('elemento-gelo', 'Elemento de Gelo', 'material', null, {}, 'imagens/itens/itens-geral/itens/DROPS/Elemento_Gelo.png'),
     ];
 
   const BASE_STATS = {
@@ -258,8 +268,6 @@ const ITENS_INICIAIS = [
     { id: 'pocao-mana-basica-1', quantidade: 2 },
     { id: 'porrete-1', quantidade: 1 },
     { id: 'graveto-1', quantidade: 1 },
-    //teste de camadas
-    { id: 'espada-abissal-1', quantidade: 1 }
 ];
 
 
@@ -842,9 +850,24 @@ carregarDadosSave: function(dados) {
     }
 
     state.inventory = Array.from(
-        { length: INV_SIZE },
-        (_, i) => dados.inventory[i] || null
-    );
+    { length: INV_SIZE },
+    (_, i) => {
+        const itemSalvo = dados.inventory[i];
+
+        if (!itemSalvo) return null;
+
+        const itemCatalogo = ITEMS.find(
+            item => item.id === itemSalvo.id
+        );
+
+        if (!itemCatalogo) return itemSalvo;
+
+        return {
+            ...itemSalvo,
+            imagem: itemCatalogo.imagem
+        };
+    }
+);
 
     state.equipment = Object.fromEntries(
         EQ_SLOTS.map(slot => [
