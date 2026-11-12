@@ -166,6 +166,7 @@ function atualizarMenuItens() {
     }
 
     window.inventario.removerItem(idItem);
+    AudioGame.tocarEfeito("pocao");
 
     atualizarMenuItens();
 
@@ -773,6 +774,7 @@ function iniciarCombate(novoInimigo) {
     executandoAcao = false;
 
     inimigo = novoInimigo;
+    AudioGame.tocarMusica("combate");
 
     const telaCombate = document.querySelector("#tela-combate");
 
@@ -812,6 +814,7 @@ async function executarTurnoInimigo() {
 
     if (jogador.vidaAtual <= 0) {
         combateFinalizado = true;
+        AudioGame.tocarMusica("ambiente");
         bloquearAcoesCombate();
         botaoAtacar.disabled = true;
 
@@ -943,6 +946,10 @@ function calcularDanoHabilidade(atacante, defensor, habilidade) {
 function aplicarDano(defensor, dano) {
     defensor.vidaAtual -= dano;
 
+    if (defensor === jogador) {
+    AudioGame.tocarEfeito("dano");
+}
+
     if (defensor.vidaAtual < 0) {
         defensor.vidaAtual = 0;
     }
@@ -996,6 +1003,14 @@ async function usarHabilidade(idHabilidade) {
 
     consumirMana(jogador, habilidade.custoMana);
 
+    if (idHabilidade === "bolaDeFogo") {
+    AudioGame.tocarEfeito("bolaFogo");
+}
+
+if (idHabilidade === "cortePoderoso") {
+    AudioGame.tocarEfeito("cortePoderoso");
+}
+
     adicionarMensagem(`Você usou ${habilidade.nome}!`);
 
     if (verificarEsquiva(jogador, inimigo)) {
@@ -1012,6 +1027,7 @@ async function usarHabilidade(idHabilidade) {
 
     if (inimigo.vidaAtual <= 0) {
         combateFinalizado = true;
+        AudioGame.tocarMusica("ambiente");
         if (regiaoAtual === "nevada") {
             registrarDerrotaInimigoNevada();
         } else {
@@ -1039,6 +1055,9 @@ async function usarHabilidade(idHabilidade) {
 
 function atacar(atacante, defensor) {
     const nomeAtacante = atacante.nome || "Jogador";
+    if (atacante === jogador) {
+    AudioGame.tocarEfeito("ataque");
+}
     const nomeDefensor = defensor.nome || "Jogador";
 
     adicionarMensagem(`${nomeAtacante} atacou ${nomeDefensor}!`);
@@ -1081,6 +1100,7 @@ async function atacarComJogador() {
 
     if (inimigo.vidaAtual <= 0) {
         combateFinalizado = true;
+        AudioGame.tocarMusica("ambiente");
         if (regiaoAtual === "nevada") {
             registrarDerrotaInimigoNevada();
         } else {
